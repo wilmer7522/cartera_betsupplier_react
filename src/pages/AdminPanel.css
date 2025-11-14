@@ -1,0 +1,315 @@
+/* === ESTRUCTURA GENERAL === */
+.admin-panel {
+  background-color: #0d1b2a;
+  color: #fff;
+  min-height: 100vh;
+  padding: 20px;
+  font-family: "Poppins", sans-serif;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.btn-salir {
+  background-color: #c62828;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn-salir:hover {
+  background-color: #b71c1c;
+}
+
+/* === FORMULARIO === */
+.admin-form {
+  background-color: #1b263b;
+  padding: 25px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.form-fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.form-fields input,
+.form-fields select {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  background-color: #2b3a55;
+  color: #fff;
+  flex: 1 1 180px;
+  min-width: 120px;
+  font-size: 14px;
+}
+
+/* === ROL + VENDEDORES === */
+.rol-vendedor-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  flex: 1 1 100%;
+}
+
+.vendedores-asociados-container {
+  position: relative;
+  flex: 1 1 200px;
+}
+
+.btn-toggle-vendedores {
+  background-color: #00bcd4;
+  color: #121212;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-toggle-vendedores:hover {
+  background-color: #0097a7;
+  color: #fff;
+}
+
+/* === ANIMACIÓN DE FADE-IN === */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === PANEL DE VENDEDORES === */
+.panel-vendedores {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  width: 380px;
+  max-height: 320px;
+  overflow: hidden;
+  background: #1f1e1e;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 12px;
+  z-index: 50;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.panel-vendedores p {
+  color: #00bcd4;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+/* === LISTA DE VENDEDORES === */
+.checkbox-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 240px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+/* Scroll bonito */
+.checkbox-list::-webkit-scrollbar {
+  width: 6px;
+}
+.checkbox-list::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 3px;
+}
+.checkbox-list::-webkit-scrollbar-thumb:hover {
+  background: #00bcd4;
+}
+
+/* === CADA VENDEDOR === */
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #2b2b2b;
+  border-radius: 6px;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+  text-transform: uppercase;
+  transition: all 0.25s ease;
+}
+
+/* Ocultamos el checkbox real */
+.checkbox-item input[type="checkbox"] {
+  display: none;
+}
+
+/* Texto del vendedor */
+.checkbox-item span {
+  width: 100%;
+  text-align: left;
+  transition: color 0.25s ease, background 0.25s ease;
+}
+
+/* Hover */
+.checkbox-item:hover span {
+  background-color: #00bcd420;
+  border-radius: 6px;
+}
+
+/* ✅ Efecto de selección */
+.checkbox-item input[type="checkbox"]:checked + span {
+  background-color: #00bcd4;
+  color: #121212;
+  font-weight: bold;
+  border-radius: 6px;
+  padding: 10px;
+  box-shadow: 0 0 10px #00bcd470;
+  transform: scale(1.02);
+}
+
+/* === BOTONES DEL FORMULARIO === */
+.botones-form {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-guardar {
+  background-color: #00bcd4;
+  color: #121212;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn-guardar:hover {
+  background-color: #0097a7;
+  color: #fff;
+}
+
+.btn-cancelar {
+  background-color: #757575;
+  border: none;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-cancelar:hover {
+  background-color: #616161;
+}
+
+/* === TABLA DE USUARIOS === */
+.tabla-usuarios {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.tabla-usuarios th,
+.tabla-usuarios td {
+  padding: 10px;
+  border-bottom: 1px solid #333;
+  text-align: left;
+}
+
+.tabla-usuarios th {
+  background-color: #1e2a3b;
+}
+
+.btn-editar,
+.btn-eliminar {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.btn-editar {
+  color: #00bcd4;
+}
+
+.btn-eliminar {
+  color: #e53935;
+}
+
+/* === SUBIDA DE EXCEL === */
+.excel-upload {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.btn-excel {
+  background-color: #43a047;
+  padding: 10px 14px;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn-excel:hover {
+  background-color: #2e7d32;
+}
+
+/* === BOTON IR AL DASHBOARD === */
+.btn-dashboard {
+  background-color: #1565c0;
+  padding: 10px 14px;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  display: block;
+  margin: 25px auto 0;
+  transition: 0.3s;
+}
+
+.btn-dashboard:hover {
+  background-color: #0d47a1;
+}
+
+/* === FILTRO POR VENDEDOR === */
+.filtro-container {
+  margin-top: 15px;
+}
+
+.filtro-select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  background-color: #2b3a55;
+  color: #fff;
+  cursor: pointer;
+}

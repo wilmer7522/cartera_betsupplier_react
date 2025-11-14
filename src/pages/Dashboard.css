@@ -1,0 +1,618 @@
+/* === ESTRUCTURA GENERAL DEL DASHBOARD === */
+.dashboard-container {
+  background-color: #0d1b2a; /* igual que admin-panel */
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem;
+  font-family: "Poppins", sans-serif;
+  color: #fff;
+}
+
+.panel {
+  background-color: #1b263b; /* mismo que admin-form */
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  width: 100%;
+  max-width: 1950px;
+  padding: 1.5rem;
+  overflow: hidden;
+}
+
+/* === HEADER DEL PANEL === */
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.nombre{
+  display: flex;
+  justify-content: center;
+}
+
+.panel-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.panel-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-primario, .btn-excel {
+  background-color: #00bcd4;
+  color: #121212;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn-primario:hover, .btn-excel:hover {
+  background-color: #0097a7;
+  color: #fff;
+}
+
+.btn-peligro {
+  background-color: #dc2626;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-peligro:hover {
+  background-color: #b91c1c;
+}
+
+/* === SALDO === */
+.saldo-panel {
+  margin: 1rem 0;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.saldo-valor {
+  color: #ffd166;
+  margin-left: 5px; /* Separación adicional */
+}
+
+/* Estilo del panel de Cupo Disponible */
+.cupo-disponible-panel {
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+}
+
+/* Clase base del estado */
+.estado-cupo {
+  margin-left: 10px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+}
+
+/* Verde si positivo */
+.estado-cupo.activo {
+  color: #4caf50;
+  background-color: #4caf5020; /* Verde suave de fondo */
+}
+
+/* Rojo si negativo */
+.estado-cupo.bloqueado {
+  color: #e53935;
+  background-color: #e5393520; /* Rojo suave de fondo */
+}
+
+
+/* === BUSCADOR === */
+.buscador-container {
+  display: flex;
+  justify-content: flex-end;
+  margin: 1rem 0;
+}
+
+.btn-limpiar {
+  background-color: #00bcd4;
+  color: rgb(0, 0, 0);
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-right: 10px;
+  transition: background-color 0.2s;
+}
+
+.btn-limpiar:hover {
+  color: #fff;
+}
+
+
+.input-busqueda {
+  width: 250px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #415a77;
+  background-color: #0d1b2a;
+  color: #fff;
+  outline: none;
+}
+
+.input-busqueda:focus {
+  border-color: #00bcd4;
+  box-shadow: 0 0 4px rgba(0, 188, 212, 0.4);
+}
+
+/* === FILTRO VENDEDOR === */
+.filtro-vendedor {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.filtro-vendedor select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #415a77;
+  background-color: #0d1b2a;
+  color: #fff;
+  cursor: pointer;
+  width: 50%;
+}
+
+/* === BOTONES DE COLUMNAS / ZONAS === */
+.filtro-cuadro {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background-color: #0d1b2a;
+  border: 1px solid #415a77;
+  margin-bottom: 15px;
+}
+
+.columna-boton {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 2px solid #415a77;
+  background-color: #0d1b2a;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 13px;
+}
+
+.columna-boton:hover {
+  background-color: #415a77;
+}
+
+.columna-boton.activo {
+  background-color: #ffd166;
+  color: #000;
+  border-color: #ffd166;
+}
+
+/* === EXCEL UPLOAD === */
+.excel-upload {
+  display: flex;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.btn-excel {
+  font-size: 13px;
+}
+
+/* === TABLA === */
+.tabla-contenedor {
+  max-height: 60vh;
+  overflow-y: auto;
+  overflow-x: hidden; /* ✅ evita scroll lateral */
+  border-radius: 8px;
+  border: 1px solid #415a77;
+}
+
+.tabla-dashboard {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed; /* ✅ distribuye columnas equitativamente */
+}
+
+.tabla-dashboard th,
+.tabla-dashboard td {
+  word-wrap: break-word; /* ✅ corta texto largo */
+  white-space: normal; /* ✅ permite salto de línea */
+  text-align: center;
+  vertical-align: middle;
+  padding: 6px 8px;
+}
+
+.tabla-dashboard tr:hover {
+  background-color: #2b3a55;
+}
+
+/* === MENSAJES === */
+.texto-cargando,
+.texto-vacio {
+  text-align: center;
+  margin: 1rem 0;
+  color: #c0c0c0;
+}
+
+
+.tabla-dashboard th,
+.tabla-dashboard td {
+  text-align: center; /* centra horizontalmente */
+  vertical-align: middle; /* centra verticalmente */
+}
+
+
+
+
+.contadores {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.contador-item {
+  background-color: #1b263b;
+  border: 2px solid #415a77;
+  border-radius: 8px;
+  padding: 6px 12px;
+  color: white;
+  text-align: center;
+  min-width: 120px;
+}
+
+.contador-label {
+  display: block;
+  font-size: 0.8rem;
+  color: #a0aec0;
+}
+
+.contador-valor {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #ffd166;
+}
+
+
+
+
+
+
+
+/* === Menú desplegable compacto para ordenar === */
+.dropdown-container {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-btn {
+  background: #1e2a3b;
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  width: 22px;
+  height: 22px;
+  line-height: 22px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s;
+  padding: 0;
+}
+
+.dropdown-btn:hover {
+  background: #00bcd4;
+  color: #121212;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 28px;
+  left: -60px;
+  background: #1f1e1e;
+  border: 1px solid #333;
+  border-radius: 6px;
+  width: 130px;
+  z-index: 9999;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+  overflow: visible !important; /* 👈 esto evita que se recorte */
+  opacity: 0;
+  transform: translateY(-5px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.dropdown-menu.show {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  transform: translateX(-10px);
+}
+
+.dropdown-menu button {
+  display: block;
+  background: none;
+  border: none;
+  color: #fff;
+  width: 100%;
+  padding: 8px 10px;
+  text-align: left;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.dropdown-menu button:hover {
+  background: #00bcd420;
+  color: #00bcd4;
+}
+
+/* === BOTÓN DE ENGRANAJE ACTIVO === */
+.dropdown-btn.orden-activo {
+  background-color: #00bcd4;
+  color: #121212;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.dropdown-btn.orden-activo:hover {
+  background-color: #0097a7;
+  color: #fff;
+}
+
+/* === OPCIONES ACTIVAS DEL MENÚ DE ORDEN === */
+.dropdown-menu button {
+  background: none;
+  border: none;
+  color: #ddd;
+  padding: 8px 10px;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.dropdown-menu button:hover {
+  background-color: #00bcd420;
+  color: #fff;
+}
+
+/* 🔹 Opción activa (menor a mayor o mayor a menor) */
+.dropdown-menu button.activo {
+  background-color: #00bcd4;
+  color: #121212;
+  font-weight: bold;
+  border-radius: 6px;
+}
+
+
+
+
+
+/* === POSICIÓN Y ESTILO GENERAL === */
+.dashboard-container {
+  display: flex;
+  flex-direction: column; /* ✅ apila las secciones una debajo de otra */
+  align-items: center;
+  overflow-y: auto; /* ✅ permite desplazamiento */
+  padding: 20px;
+  background-color: #0d1b2a;
+
+  color: #fff;
+}
+
+/* === CONTENEDOR DE GRÁFICAS ARRIBA === */
+.graficas-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:space-between;
+  gap: 25px;
+  width: 100%;
+  max-width: 1640px;
+  background-color: #0d1b2a;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  margin-bottom: 30px; /* ✅ separa del contenido inferior */
+}
+
+.grafica-item {
+  flex: 1 1 600px;
+  background-color: #24344d;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease;
+}
+
+.grafica-item:hover {
+  transform: scale(1.01);
+}
+
+.grafica-item h4 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #00bcd4;
+}
+
+
+
+
+
+/* === NUEVO PANEL DE VENDEDORES DESPLEGABLE === */
+.vendedores-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.btn-toggle-vendedores {
+  background-color: #00bcd4;
+  color: #121212;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-toggle-vendedores:hover {
+  background-color: #0097a7;
+  color: #fff;
+}
+
+.panel-vendedores {
+  position: absolute;
+  top: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 380px;
+  max-height: 320px;
+  overflow: hidden;
+  background: #1f1e1e;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 12px;
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* === LISTA DE CHECKBOXES === */
+.checkbox-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 240px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.checkbox-list::-webkit-scrollbar {
+  width: 6px;
+}
+.checkbox-list::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 3px;
+}
+.checkbox-list::-webkit-scrollbar-thumb:hover {
+  background: #00bcd4;
+}
+
+/* === CADA OPCIÓN === */
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #2b2b2b;
+  border-radius: 6px;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+  text-transform: uppercase;
+  transition: all 0.25s ease;
+}
+
+/* Ocultar el checkbox real */
+.checkbox-item input[type="checkbox"] {
+  display: none;
+}
+
+/* Hover */
+.checkbox-item:hover {
+  background-color: #415a77;
+}
+
+/* ✅ Efecto seleccionado */
+.checkbox-item input[type="checkbox"]:checked + span {
+  background-color: #00bcd4;
+  color: #121212;
+  font-weight: bold;
+  border-radius: 6px;
+  padding: 8px;
+  box-shadow: 0 0 10px #00bcd470;
+  transform: scale(1.02);
+}
+
+/* === BOTÓN LIMPIAR === */
+.btn-limpiar-vendedores {
+  background-color: #757575;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+  transition: 0.3s;
+}
+
+.btn-limpiar-vendedores:hover {
+  background-color: #616161;
+}
+
+/* Animación */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* === SEGUNDO PANEL DE VENDEDORES === */
+.panel-vendedores-secundario {
+  position: absolute;
+  top: 97%; /* 👇 más cerca del botón */
+  left: 7%; /* 👈 se alinea con el botón */
+  transform: none; /* ✅ evita centrarlo en la pantalla */
+  width: 380px;
+  max-height: 320px;
+  overflow: hidden;
+  background: #1f1e1e;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 12px;
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.tabla-dashboard thead th {
+  position: sticky;
+  top: 0;
+  background-color: #1b263b; /* mismo fondo del panel para que destaque */
+  z-index: 5;
+  color: #fff;
+  text-align: center;
+  padding: 6px 8px;
+}
