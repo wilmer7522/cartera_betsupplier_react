@@ -24,7 +24,7 @@ export default function AdminPanel() {
   // === CARGAR USUARIOS ===
   const cargarUsuarios = useCallback(async () => {
     try {
-      const res = await axios.get("http://127.0.0.1:8000/usuarios/todos", {
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/usuarios/todos`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = res.data.usuarios || [];
@@ -50,7 +50,7 @@ export default function AdminPanel() {
 
   const cargarVendedoresBase = useCallback(async () => {
     try {
-      const res = await axios.get("http://127.0.0.1:8000/excel/ver_dashboard", {
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/excel/ver_dashboard`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -131,7 +131,7 @@ export default function AdminPanel() {
 
       if (editando) {
         await axios.put(
-          `http://127.0.0.1:8000/usuarios/actualizar/${usuarioSeleccionado}`,
+          `${process.env.REACT_APP_API_URL}/usuarios/actualizar/${usuarioSeleccionado}`,
           datos,
           {
             headers: {
@@ -141,7 +141,7 @@ export default function AdminPanel() {
           }
         );
       } else {
-        await axios.post("http://127.0.0.1:8000/usuarios/crear", datos, {
+        await axios.post(`${process.env.REACT_APP_API_URL}/usuarios/crear`, datos, {
           headers: { Authorization: `Bearer ${token}` },
         });
       }
@@ -177,7 +177,7 @@ export default function AdminPanel() {
   const eliminarUsuario = async (correo) => {
     if (!window.confirm(`¿Eliminar usuario "${correo}"?`)) return;
     try {
-      await axios.delete(`http://127.0.0.1:8000/usuarios/eliminar/${correo}`, {
+      await axios.delete(`${process.env.REACT_APP_API_URL}/usuarios/eliminar/${correo}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       cargarUsuarios();
@@ -195,7 +195,7 @@ export default function AdminPanel() {
     formData.append("archivo", archivo);
     try {
       const res = await axios.post(
-        "http://127.0.0.1:8000/excel/subir",
+        `${process.env.REACT_APP_API_URL}/excel/subir`,
         formData,
         {
           headers: {
@@ -219,7 +219,7 @@ export default function AdminPanel() {
     formData.append("archivo", archivo);
     try {
       const res = await axios.post(
-        "http://127.0.0.1:8000/excel/subir_cupo_cartera",
+        `${process.env.REACT_APP_API_URL}/excel/subir_cupo_cartera`,
         formData,
         {
           headers: {

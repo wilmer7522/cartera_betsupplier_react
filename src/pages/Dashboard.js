@@ -88,13 +88,16 @@ export default function Dashboard() {
     "Venc_91",
   ];
 
-  const nombresColumnas = useMemo(() => ({
-  Por_Venc: "💰 Por Vencer",
-  Venc_0_30: "📅 Vencido 0-30 dias",
-  Venc_31_60: "⏳ Vencido 31-60 dias", 
-  Venc_61_90: "⌛ Vencido 61-90 dias",
-  Venc_91: "⚠️ Mas de 90 dias",
-}), []);
+  const nombresColumnas = useMemo(
+    () => ({
+      Por_Venc: "💰 Por Vencer",
+      Venc_0_30: "📅 Vencido 0-30 dias",
+      Venc_31_60: "⏳ Vencido 31-60 dias",
+      Venc_61_90: "⌛ Vencido 61-90 dias",
+      Venc_91: "⚠️ Mas de 90 dias",
+    }),
+    []
+  );
 
   // === Cargar Dashboard + Cupo Cartera ===
   const cargarDatos = useCallback(async () => {
@@ -103,10 +106,10 @@ export default function Dashboard() {
       setMensaje("");
 
       const [resDashboard, resCupo] = await Promise.all([
-        axios.get("http://127.0.0.1:8000/excel/ver_dashboard", {
+        axios.get(`${process.env.REACT_APP_API_URL}/excel/ver_dashboard`, {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        axios.get("http://127.0.0.1:8000/excel/ver_cupo_cartera", {
+        axios.get(`${process.env.REACT_APP_API_URL}/excel/ver_cupo_cartera`, {
           headers: { Authorization: `Bearer ${token}` },
         }),
       ]);
@@ -270,7 +273,6 @@ export default function Dashboard() {
 
   // Helper: devuelve los datos filtrados por los filtros globales pero
   // opcionalmente excluyendo el filtro aplicado a una columna específica.
-  
 
   const seleccionarColumna = (col) => {
     if (col === "Nombre_Zona" || col === "Nombre_Ciudad") return; // No toca columnaSeleccionada
@@ -539,7 +541,6 @@ export default function Dashboard() {
 
   // Filas que sí deben mostrarse en la tabla: excluir filas que no tienen
   // ningún valor monetario (evita filas "totales" o vacías al final)
-  
 
   // === Columnas visibles dinámicamente ===
   const columnasParaTabla = columnasVisibles
@@ -833,7 +834,7 @@ export default function Dashboard() {
               };
 
               const response = await fetch(
-                "http://127.0.0.1:8000/excel/descargar_filtrado",
+                `${process.env.REACT_APP_API_URL}/excel/descargar_filtrado`,
                 {
                   method: "POST",
                   headers: {
