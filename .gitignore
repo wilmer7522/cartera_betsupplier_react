@@ -13,37 +13,16 @@
 
 # misc
 .DS_Store
-.env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
-.env.*.local
 
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-pnpm-debug.log*
-*.log
 
-# Caches y temporales
-.cache/
-.tmp/
-.pnp.js
-.pnp/
-
-# Testing / cobertura
-/coverage/
-
-# Build/producción
-/build/
-
-# IDE / Sistema
-.DS_Store
-.vscode/
-.idea/
-
-# Archivos generados/Uploads
-public/uploads/
-uploads/
+node_modules/
+build/
+.env
 

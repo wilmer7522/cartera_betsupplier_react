@@ -24,16 +24,25 @@ export default function AdminPanel() {
   // === CARGAR USUARIOS ===
   const cargarUsuarios = useCallback(async () => {
     try {
-      const res = await axios.get(`${process.env.REACT_APP_API_URL}/usuarios/todos`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await axios.get(
+        `${process.env.REACT_APP_API_URL}/usuarios/todos`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       const data = res.data.usuarios || [];
       setUsuarios(data);
       setUsuariosFiltrados(data);
     } catch (err) {
       console.error("Error al cargar usuarios:", err);
+      // 🔥 NUEVO: Redirigir al login si el token expiró
+      if (err.response?.status === 401) {
+        localStorage.clear();
+        navigate("/login");
+        return;
+      }
     }
-  }, [token]);
+  }, [token, navigate]); // 🔥 Agregar navigate como dependencia
 
   useEffect(() => {
     cargarUsuarios();
@@ -50,9 +59,12 @@ export default function AdminPanel() {
 
   const cargarVendedoresBase = useCallback(async () => {
     try {
-      const res = await axios.get(`${process.env.REACT_APP_API_URL}/excel/ver_dashboard`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await axios.get(
+        `${process.env.REACT_APP_API_URL}/excel/ver_dashboard`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
       // Extraemos los nombres únicos de vendedores de la base de conocimiento
       const data = res.data.datos || [];
@@ -65,8 +77,14 @@ export default function AdminPanel() {
       setVendedoresBase(vendedoresUnicos);
     } catch (err) {
       console.error("Error al cargar vendedores de base de conocimiento:", err);
+      // 🔥 NUEVO: Redirigir al login si el token expiró
+      if (err.response?.status === 401) {
+        localStorage.clear();
+        navigate("/login");
+        return;
+      }
     }
-  }, [token]);
+  }, [token, navigate]); // 🔥 Agregar navigate como dependencia
 
   useEffect(() => {
     cargarVendedoresBase();
@@ -100,7 +118,6 @@ export default function AdminPanel() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // === TOGGLE CHECKBOX ===
   // === TOGGLE CHECKBOX (normaliza mayúsculas y minúsculas) ===
   const toggleVendedorAsociado = (nombreVendedor) => {
     setVendedoresAsociados((prev) => {
@@ -115,6 +132,36 @@ export default function AdminPanel() {
       // Si no está → agregarlo
       return [...prev, vendedorUpper];
     });
+  };
+
+  // === SELECCIONAR TODOS LOS VENDEDORES ===
+  const seleccionarTodos = () => {
+    setVendedoresAsociados(vendedoresBase.map((v) => v.toUpperCase()));
+  };
+
+  // === DESELECCIONAR TODOS LOS VENDEDORES ===
+  const deseleccionarTodos = () => {
+    setVendedoresAsociados([]);
+  };
+
+  // === VERIFICAR SI TODOS ESTÁN SELECCIONADOS ===
+  const todosSeleccionados = useMemo(() => {
+    if (vendedoresBase.length === 0) return false;
+    const vendedoresAsociadosUpper = vendedoresAsociados.map((v) =>
+      v.toUpperCase()
+    );
+    return vendedoresBase.every((vendedor) =>
+      vendedoresAsociadosUpper.includes(vendedor.toUpperCase())
+    );
+  }, [vendedoresAsociados, vendedoresBase]);
+
+  // === TOGGLE TODOS (seleccionar/deseleccionar todos) ===
+  const toggleTodos = () => {
+    if (todosSeleccionados) {
+      deseleccionarTodos();
+    } else {
+      seleccionarTodos();
+    }
   };
 
   // === GUARDAR / ACTUALIZAR ===
@@ -141,9 +188,13 @@ export default function AdminPanel() {
           }
         );
       } else {
-        await axios.post(`${process.env.REACT_APP_API_URL}/usuarios/crear`, datos, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        await axios.post(
+          `${process.env.REACT_APP_API_URL}/usuarios/crear`,
+          datos,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
       }
 
       setCorreo("");
@@ -177,9 +228,12 @@ export default function AdminPanel() {
   const eliminarUsuario = async (correo) => {
     if (!window.confirm(`¿Eliminar usuario "${correo}"?`)) return;
     try {
-      await axios.delete(`${process.env.REACT_APP_API_URL}/usuarios/eliminar/${correo}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axios.delete(
+        `${process.env.REACT_APP_API_URL}/usuarios/eliminar/${correo}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       cargarUsuarios();
     } catch (err) {
       alert("❌ Error al eliminar usuario");
@@ -238,15 +292,40 @@ export default function AdminPanel() {
 
   const cerrarSesion = () => {
     localStorage.clear();
-    window.location.href = "/login";
+    window.location.href = "/login"; // 🔥 CAMBIADO
   };
 
-  /*const vendedoresSolo = usuarios.filter((u) => u.rol === "vendedor");*/
+  // 🔥 Timer para cerrar sesión automáticamente después de 5 minutos (SIN CONTADOR VISUAL)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      console.log("🔄 Cerrando sesión automáticamente...");
+      localStorage.clear();
+      // 🔥 Forzar recarga completa para limpiar todo
+      window.location.href = "/login";
+    }, 30 * 60 * 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
+  // 🔥 FUNCIÓN PARA FORMATEAR FECHA
+  const formatearFecha = (fechaISO) => {
+    if (!fechaISO) return "Nunca";
+
+    const fecha = new Date(fechaISO);
+    return fecha.toLocaleDateString("es-ES", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
+  };
+
+  /*======== RENDER ======*/
   return (
     <div className="admin-panel">
       <div className="admin-header">
-        <h2>👑 Panel de Administración</h2>
+        <h2>Panel de Administración</h2>
         <button onClick={cerrarSesion} className="btn-salir">
           🔒 Cerrar Sesión
         </button>
@@ -298,7 +377,20 @@ export default function AdminPanel() {
 
               {mostrarPanel && (
                 <div className="panel-vendedores">
-                  <p>Vendedores asociados:</p>
+                  <div className="panel-header">
+                    <p>Vendedores asociados:</p>
+                    <div className="botones-todos">
+                      <button
+                        type="button"
+                        className="btn-todos"
+                        onClick={toggleTodos}
+                      >
+                        {todosSeleccionados
+                          ? " Quitar todos"
+                          : " Seleccionar todos"}
+                      </button>
+                    </div>
+                  </div>
                   <div className="checkbox-list scrollable">
                     {vendedoresBase.length > 0 ? (
                       vendedoresBase.map((nombreVendedor) => {
@@ -356,6 +448,39 @@ export default function AdminPanel() {
         </div>
       </form>
 
+      {/* Subida de archivos */}
+      <div className="excel-upload">
+        <label htmlFor="excel-base" className="btn-excel">
+          📤 Subir Base de Conocimiento
+        </label>
+        <input
+          type="file"
+          id="excel-base"
+          accept=".xlsx, .xls"
+          style={{ display: "none" }}
+          onChange={subirExcelBase}
+        />
+
+        <label
+          htmlFor="excel-cupo"
+          className="btn-excel"
+          style={{ marginLeft: "10px" }}
+        >
+          📤 Subir Cupo Cartera
+        </label>
+        <input
+          type="file"
+          id="excel-cupo"
+          accept=".xlsx, .xls"
+          style={{ display: "none" }}
+          onChange={subirExcelCupo}
+        />
+      </div>
+
+      <button className="btn-dashboard" onClick={() => navigate("/dashboard")}>
+        📊 Dashboard
+      </button>
+
       {/* Filtro */}
       <div className="filtro-container">
         <label>Filtrar por vendedor:</label>
@@ -374,6 +499,7 @@ export default function AdminPanel() {
       </div>
 
       {/* Tabla de usuarios */}
+      {/* Tabla de usuarios */}
       <h3>📋 Lista de Usuarios</h3>
       <table className="tabla-usuarios">
         <thead>
@@ -381,6 +507,7 @@ export default function AdminPanel() {
             <th>Correo</th>
             <th>Nombre</th>
             <th>Rol</th>
+            <th>Último Login</th> {/* 🔥 NUEVA COLUMNA */}
             <th>Asociados</th>
             <th>Acciones</th>
           </tr>
@@ -391,6 +518,9 @@ export default function AdminPanel() {
               <td>{u.correo}</td>
               <td>{u.nombre}</td>
               <td>{u.rol}</td>
+              <td>
+                {formatearFecha(u.ultimo_login)} {/* 🔥 NUEVA CELDA */}
+              </td>
               <td>
                 {u.vendedores_asociados?.length ? (
                   u.vendedores_asociados.length > 4 ? ( // Si hay muchos, usa un desplegable
@@ -430,7 +560,6 @@ export default function AdminPanel() {
                   "—"
                 )}
               </td>
-
               <td>
                 <button className="btn-editar" onClick={() => editarUsuario(u)}>
                   ✏️
@@ -446,39 +575,6 @@ export default function AdminPanel() {
           ))}
         </tbody>
       </table>
-
-      {/* Subida de archivos */}
-      <div className="excel-upload">
-        <label htmlFor="excel-base" className="btn-excel">
-          📤 Subir Base de Conocimiento
-        </label>
-        <input
-          type="file"
-          id="excel-base"
-          accept=".xlsx, .xls"
-          style={{ display: "none" }}
-          onChange={subirExcelBase}
-        />
-
-        <label
-          htmlFor="excel-cupo"
-          className="btn-excel"
-          style={{ marginLeft: "10px" }}
-        >
-          📤 Subir Cupo Cartera
-        </label>
-        <input
-          type="file"
-          id="excel-cupo"
-          accept=".xlsx, .xls"
-          style={{ display: "none" }}
-          onChange={subirExcelCupo}
-        />
-      </div>
-
-      <button className="btn-dashboard" onClick={() => navigate("/dashboard")}>
-        📊 Ir al Dashboard
-      </button>
     </div>
   );
 }
