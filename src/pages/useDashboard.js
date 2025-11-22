@@ -466,10 +466,10 @@ export const useDashboard = () => {
     setColumnaSeleccionada((prev) => (prev === col ? "" : col));
   }, []);
 
-  const cerrarSesion = useCallback(() => {
+  const cerrarSesion = () => {
     localStorage.clear();
-    navigate("/login");
-  }, [navigate]);
+    window.location.href = "/login"; // 🔥 CAMBIADO
+  };
 
   const formatYAxisTick = useCallback((value) => {
     const n = typeof value === "number" ? value : parseNumber(value);
@@ -503,13 +503,16 @@ export const useDashboard = () => {
     return () => document.removeEventListener("click", handleClickOutside);
   }, []);
 
+  // 🔥 Timer para cerrar sesión automáticamente después de 5 minutos (SIN CONTADOR VISUAL)
   useEffect(() => {
     const timer = setTimeout(() => {
+      console.log("🔄 Cerrando sesión automáticamente...");
       localStorage.clear();
-      navigate("/login");
+      // 🔥 Forzar recarga completa para limpiar todo
+      window.location.href = "/login";
     }, 30 * 60 * 1000);
     return () => clearTimeout(timer);
-  }, [navigate]);
+  }, []);
 
   // ========== FUNCIONES DE NAVEGACIÓN ==========
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
