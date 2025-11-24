@@ -450,7 +450,7 @@ export default function AdminPanel() {
 
       {/* Subida de archivos */}
       <div className="excel-upload">
-        <label htmlFor="excel-base" className="btn-excel">
+        <label id="base-conocimiento" htmlFor="excel-base" className="btn-excel">
           📤 Subir Base de Conocimiento
         </label>
         <input
@@ -461,7 +461,7 @@ export default function AdminPanel() {
           onChange={subirExcelBase}
         />
 
-        <label
+        <label id="cupo-cartera"
           htmlFor="excel-cupo"
           className="btn-excel"
           style={{ marginLeft: "10px" }}

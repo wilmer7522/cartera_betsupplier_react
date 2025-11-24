@@ -52,7 +52,7 @@ function Login() {
       <form onSubmit={handleLogin} className="login-form">
         <h2>🔐 Iniciar Sesión</h2>
 
-        <input
+        <input id="email"
           type="email"
           placeholder="Correo electrónico"
           value={correo}
@@ -61,7 +61,7 @@ function Login() {
           disabled={cargando}
         />
 
-        <input
+        <input id="password"
           type="password"
           placeholder="Contraseña"
           value={password}
@@ -70,7 +70,7 @@ function Login() {
           disabled={cargando}
         />
 
-        <button type="submit" disabled={cargando}>
+        <button id="enter" type="submit" disabled={cargando}>
           {cargando ? "Ingresando..." : "Ingresar"}
         </button>
       </form>
