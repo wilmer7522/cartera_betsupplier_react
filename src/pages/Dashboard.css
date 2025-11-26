@@ -967,7 +967,7 @@ body {
   .filtro-cuadro {
     justify-content: center;
     gap: 10px; /* 🔹 AUMENTADO: Más espacio entre botones */
-    padding: 25px; /* 🔹 AUMENTADO: Más padding interno */
+    padding: 10px; /* 🔹 AUMENTADO: Más padding interno */
   }
   
   .columna-boton {
@@ -975,9 +975,8 @@ body {
     font-size: 24px; /* 🔹 AUMENTADO: Texto más legible */
     padding: 24px 36px; /* 🔹 AUMENTADO: Botones más grandes */
     flex: 0 1 calc(50% - 12px);
-    
-    min-width: 440px;
-    font-weight: 900; /* 🔹 NUEVO: Texto más grueso */
+    min-width: 400px;
+    font-weight: 600; /* 🔹 NUEVO: Texto más grueso */
   }
   
   /* 🔹 BOTONES GENERALES MÁS GRANDES EN TABLET */
