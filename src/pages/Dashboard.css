@@ -931,6 +931,13 @@ body {
   padding: 10px 20px;
   font-size: 24px;
 }
+
+.btn-limpiar-vendedores {
+  font-size: 30px !important; /* 🔹 AUMENTADO: Texto más grande */
+  padding: 14px; /* 🔹 AUMENTADO: Botón más grande */
+  
+ 
+}
   
   /* 🔹 CONTADORES MÁS GRANDES EN TABLET */
   .contadores {
