@@ -15,6 +15,18 @@
   --color-border: #415a77;
   --color-text: #ffffff;
   --color-text-secondary: #a0aec0;
+  
+  /* 🔹 NUEVAS VARIABLES RESPONSIVE */
+  --breakpoint-mobile: 480px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1024px;
+  --breakpoint-large: 1200px;
+  
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
 }
 
 /* === RESET Y ESTILOS BASE === */
@@ -37,10 +49,11 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem;
+  padding: var(--spacing-lg);
   background-color: var(--color-background);
   position: relative;
   overflow-y: auto;
+  width: 100%;
 }
 
 /* === PANEL PRINCIPAL === */
@@ -50,9 +63,9 @@ body {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
   width: 100%;
   max-width: 1950px;
-  padding: 1.5rem;
+  padding: var(--spacing-md);
   overflow: hidden;
-  margin-bottom: 2rem;
+  margin-bottom: var(--spacing-lg);
 }
 
 /* === HEADER Y NAVEGACIÓN === */
@@ -62,7 +75,7 @@ body {
   align-items: center;
   flex-wrap: wrap;
   gap: 15px;
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--spacing-md);
 }
 
 .panel-header h2 {
@@ -74,7 +87,7 @@ body {
 .nombre {
   display: flex;
   justify-content: center;
-  margin: 1rem 0;
+  margin: var(--spacing-sm) 0;
 }
 
 .nombre h2 {
@@ -97,6 +110,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 5px;
+  white-space: nowrap;
 }
 
 .btn-primario:hover,
@@ -115,6 +129,7 @@ body {
   cursor: pointer;
   font-weight: bold;
   transition: background-color 0.3s ease;
+  white-space: nowrap;
 }
 
 .btn-peligro:hover {
@@ -125,18 +140,21 @@ body {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
-  margin-top: 1rem;
+  margin-top: var(--spacing-sm);
+  justify-content: center;
 }
 
 /* === SECCIÓN DE SALDOS Y CUPOS === */
 .saldo-panel {
-  margin: 1rem 0;
+  margin: var(--spacing-sm) 0;
   font-weight: bold;
   font-size: 1.1rem;
   padding: 10px 15px;
   background-color: var(--color-panel);
   border-radius: 8px;
   border-left: 4px solid var(--color-primary);
+  width: 100%;
+  max-width: 500px;
 }
 
 .saldo-valor {
@@ -185,8 +203,10 @@ body {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  margin: 1rem 0;
+  margin: var(--spacing-sm) 0;
   gap: 10px;
+  width: 100%;
+  flex-wrap: wrap;
 }
 
 .input-busqueda {
@@ -198,6 +218,8 @@ body {
   color: var(--color-text);
   outline: none;
   transition: border-color 0.3s ease;
+  flex: 1;
+  min-width: 200px;
 }
 
 .input-busqueda:focus {
@@ -211,8 +233,9 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 15px;
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--spacing-md);
   flex-wrap: wrap;
+  width: 100%;
 }
 
 /* Contenedor de vendedores */
@@ -221,68 +244,6 @@ body {
   display: flex;
   justify-content: center;
   margin: 20px 0;
-}
-
-/* === SEGUNDO FILTRO DE VENDEDORES - POSICIÓN CORREGIDA === */
-.filtro-vendedores {
-  position: relative;
-  display: inline-block;
-}
-
-.panel-vendedores-secundario {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  transform: none;
-  width: 380px;
-  max-height: 320px;
-  overflow: hidden;
-  background: #1f1e1e;
-  border: 1px solid #333;
-  border-radius: 10px;
-  padding: 12px;
-  z-index: 100;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  animation: fadeIn 0.3s ease-in-out;
-  margin-top: 5px;
-}
-
-/* Si el segundo filtro está a la derecha, ajusta la posición */
-.filtro-vendedor .filtro-vendedores {
-  position: relative;
-}
-
-/* Asegurar que no se salga de la pantalla */
-.panel-vendedores-secundario {
-  right: 0;
-  left: auto;
-}
-
-/* Si está muy a la derecha, que se abra hacia la izquierda */
-.filtro-vendedor .filtro-vendedores:last-child .panel-vendedores-secundario {
-  right: 0;
-  left: auto;
-}
-
-/* Ajustes responsive para el segundo panel */
-@media (max-width: 767px) {
-  .panel-vendedores-secundario {
-    width: 90vw;
-    max-width: 300px;
-    left: 50% !important;
-    right: auto !important;
-    transform: translateX(-50%) !important;
-  }
-  
-  .panel-header-interno {
-    flex-direction: column;
-    gap: 10px;
-    text-align: center;
-  }
-  
-  .btn-todos {
-    width: 100%;
-  }
 }
 
 /* Botón para toggle vendedores */
@@ -296,6 +257,7 @@ body {
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
+  white-space: nowrap;
 }
 
 .btn-toggle-vendedores:hover {
@@ -329,6 +291,8 @@ body {
   margin-bottom: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid #333;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .botones-todos {
@@ -345,6 +309,7 @@ body {
   cursor: pointer;
   font-size: 12px;
   transition: background 0.3s;
+  white-space: nowrap;
 }
 
 .btn-todos:hover {
@@ -439,6 +404,8 @@ body {
   gap: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-left: 4px solid var(--color-success);
+  width: 100%;
+  flex-wrap: wrap;
 }
 
 .leyenda-vendedores strong {
@@ -450,6 +417,7 @@ body {
   font-size: 15px;
   flex: 1;
   font-weight: 900;
+  word-break: break-word;
 }
 
 /* === CONTENEDOR DE GRÁFICAS === */
@@ -474,6 +442,7 @@ body {
   border-radius: 10px;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
   transition: transform 0.2s ease;
+  min-height: 300px;
 }
 
 .grafica-item h4 {
@@ -491,9 +460,9 @@ body {
   font-family: 'Poppins', sans-serif !important;
 }
 
-
-
-
+.recharts-responsive-container {
+  width: 100% !important;
+}
 
 /* === CONTADORES DE ZONAS === */
 .contadores {
@@ -501,6 +470,8 @@ body {
   gap: 15px;
   align-items: center;
   flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
 }
 
 .contador-item {
@@ -512,6 +483,8 @@ body {
   text-align: center;
   min-width: 120px;
   transition: transform 0.2s ease;
+  flex: 1;
+  max-width: 200px;
 }
 
 .contador-item:hover {
@@ -541,12 +514,14 @@ body {
 
 /* === FILTRO DE COLUMNAS/ZONAS === */
 .columnas-panel {
-  margin: 1.5rem 0;
+  margin: var(--spacing-md) 0;
+  width: 100%;
 }
 
 .columnas-panel h4 {
   margin-bottom: 10px;
   color: var(--color-primary);
+  text-align: center;
 }
 
 .filtro-cuadro {
@@ -557,6 +532,7 @@ body {
   border-radius: 8px;
   background-color: var(--color-background);
   border: 1px solid var(--color-border);
+  justify-content: center;
 }
 
 .columna-boton {
@@ -569,6 +545,11 @@ body {
   transition: all 0.2s ease;
   font-size: 13px;
   font-weight: 500;
+  white-space: nowrap;
+  flex: 1;
+  min-width: 120px;
+  max-width: 200px;
+  text-align: center;
 }
 
 .columna-boton:hover {
@@ -583,7 +564,6 @@ body {
   font-weight: bold;
 }
 
-/* === TABLA DE DATOS === */
 /* === TABLA DE DATOS - COMPLETAMENTE RESPONSIVE === */
 .tabla-contenedor {
   width: 100%;
@@ -591,7 +571,7 @@ body {
   overflow: auto;
   border-radius: 8px;
   border: 1px solid var(--color-border);
-  margin: 1rem 0;
+  margin: var(--spacing-sm) 0;
   position: relative;
   background-color: var(--color-panel);
 }
@@ -599,7 +579,7 @@ body {
 .tabla-dashboard {
   width: 100%;
   border-collapse: collapse;
-  table-layout: fixed; /* 🔹 Distribución uniforme */
+  table-layout: fixed;
   min-width: 100%;
 }
 
@@ -615,7 +595,6 @@ body {
   text-align: center;
   padding: 12px 8px;
   font-weight: bold;
-  
   position: relative;
   word-wrap: break-word;
   white-space: normal;
@@ -626,307 +605,13 @@ body {
   text-align: center;
   vertical-align: middle;
   word-wrap: break-word;
-  white-space: normal; /* 🔹 Permite salto de línea */
+  white-space: normal;
   line-height: 1.4;
 }
 
 .tabla-dashboard tr:hover {
   background-color: var(--color-border);
   cursor: pointer;
-}
-
-
-
-/* === DISTRIBUCIÓN INTELIGENTE DE COLUMNAS === */
-/* Columnas pequeñas (IDs, códigos) */
-.tabla-dashboard th:nth-child(1), /* Cliente/NIT */
-.tabla-dashboard td:nth-child(1) {
-  width: 10%;
-  min-width: 100px;
-  max-width: 150px;
-}
-
-.tabla-dashboard th:nth-child(6), /* Documento */
-.tabla-dashboard td:nth-child(6) {
-  width: 8%;
-  min-width: 80px;
-  max-width: 120px;
-}
-
-/* Columnas medianas (fechas, vendedores) */
-.tabla-dashboard th:nth-child(3), /* Zona */
-.tabla-dashboard td:nth-child(3),
-.tabla-dashboard th:nth-child(4), /* Ciudad */
-.tabla-dashboard td:nth-child(4),
-.tabla-dashboard th:nth-child(5), /* Vendedor */
-.tabla-dashboard td:nth-child(5) {
-  width: 12%;
-  min-width: 120px;
-  max-width: 180px;
-}
-
-.tabla-dashboard th:nth-child(7), /* Fecha Exp */
-.tabla-dashboard td:nth-child(7),
-.tabla-dashboard th:nth-child(8), /* Fecha Venc */
-.tabla-dashboard td:nth-child(8) {
-  width: 8%;
-  min-width: 100px;
-  max-width: 120px;
-}
-
-.tabla-dashboard th:nth-child(9), /* Días Venc */
-.tabla-dashboard td:nth-child(9) {
-  width: 6%;
-  min-width: 80px;
-  max-width: 100px;
-}
-
-/* Columnas grandes (nombres) */
-.tabla-dashboard th:nth-child(2), /* Nombre Cliente */
-.tabla-dashboard td:nth-child(2) {
-  width: 15%;
-  min-width: 150px;
-  max-width: 250px;
-}
-
-/* Columnas monetarias (más estrechas) */
-.tabla-dashboard th:nth-child(10), /* Deuda */
-.tabla-dashboard td:nth-child(10),
-.tabla-dashboard th:nth-child(11), /* Pagado */
-.tabla-dashboard td:nth-child(11),
-.tabla-dashboard th:nth-child(12), /* Por Vencer */
-.tabla-dashboard td:nth-child(12),
-.tabla-dashboard th:nth-child(13), /* Venc 0-30 */
-.tabla-dashboard td:nth-child(13),
-.tabla-dashboard th:nth-child(14), /* Venc 31-60 */
-.tabla-dashboard td:nth-child(14),
-.tabla-dashboard th:nth-child(15), /* Venc 61-90 */
-.tabla-dashboard td:nth-child(15),
-.tabla-dashboard th:nth-child(16), /* Venc 91+ */
-.tabla-dashboard td:nth-child(16),
-.tabla-dashboard th:nth-child(17), /* Saldo */
-.tabla-dashboard td:nth-child(17),
-.tabla-dashboard th:nth-child(18), /* Cupo */
-.tabla-dashboard td:nth-child(18) {
-  width: 7%;
-  min-width: 90px;
-  max-width: 130px;
-}
-
-/* === MEJORAS DE VISUALIZACIÓN PARA DATOS LARGOS === */
-.tabla-dashboard td {
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* Permitir ver contenido completo en hover */
-.tabla-dashboard td:hover {
-  overflow: visible;
-  white-space: normal;
-  position: relative;
-  z-index: 5;
-}
-
-/* === SCROLLBAR PERSONALIZADO === */
-.tabla-contenedor::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-.tabla-contenedor::-webkit-scrollbar-track {
-  background: var(--color-background);
-  border-radius: 4px;
-}
-
-.tabla-contenedor::-webkit-scrollbar-thumb {
-  background: var(--color-border);
-  border-radius: 4px;
-}
-
-.tabla-contenedor::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary);
-}
-
-/* === ESTILOS RESPONSIVE MEJORADOS === */
-
-/* Tablet (768px - 1024px) */
-@media (max-width: 1024px) {
-  .tabla-contenedor {
-    max-height: 50vh;
-    font-size: 0.9rem;
-  }
-  
-  .tabla-dashboard th,
-  .tabla-dashboard td {
-    padding: 8px 6px;
-    font-size: 0.85rem;
-  }
-  
-  /* Ajustar anchos para tablet */
-  .tabla-dashboard th:nth-child(2),
-  .tabla-dashboard td:nth-child(2) {
-    width: 18%;
-    min-width: 140px;
-  }
-  
-  .tabla-dashboard th:nth-child(1),
-  .tabla-dashboard td:nth-child(1) {
-    width: 12%;
-    min-width: 90px;
-  }
-}
-
-/* Móvil (480px - 767px) */
-@media (max-width: 767px) {
-  .tabla-contenedor {
-    max-height: 40vh;
-    font-size: 0.8rem;
-    border: none;
-    background: transparent;
-  }
-  
-  .tabla-dashboard {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-    background-color: var(--color-panel);
-    border-radius: 8px;
-  }
-  
-  .tabla-dashboard thead,
-  .tabla-dashboard tbody,
-  .tabla-dashboard tr {
-    display: block;
-  }
-  
-  .tabla-dashboard th,
-  .tabla-dashboard td {
-    display: inline-block;
-    width: auto !important;
-    min-width: 80px;
-    max-width: none;
-    white-space: nowrap;
-    text-align: center;
-    border-bottom: 1px solid var(--color-border);
-  }
-  
-  .tabla-dashboard th {
-    background-color: var(--color-panel);
-    position: sticky;
-    left: 0;
-    border-right: 1px solid var(--color-border);
-  }
-  
-  /* Scroll horizontal suave */
-  .tabla-contenedor {
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  .th-content {
-    min-width: 80px;
-    justify-content: center;
-  }
-  
-  .th-content span {
-    font-size: 0.75rem;
-  }
-}
-
-/* Móvil muy pequeño (menos de 480px) */
-@media (max-width: 480px) {
-  .tabla-contenedor {
-    max-height: 35vh;
-    font-size: 0.75rem;
-  }
-  
-  .tabla-dashboard th,
-  .tabla-dashboard td {
-    padding: 6px 4px;
-    min-width: 70px;
-  }
-  
-  .th-content span {
-    font-size: 0.7rem;
-  }
-  
-  .dropdown-btn {
-    width: 20px;
-    height: 20px;
-    font-size: 10px;
-  }
-}
-
-/* Pantallas grandes (más de 1920px) */
-@media (min-width: 1921px) {
-  .tabla-contenedor {
-    max-width: 1800px;
-    margin: 1rem auto;
-  }
-  
-  .tabla-dashboard th,
-  .tabla-dashboard td {
-    padding: 14px 10px;
-    font-size: 1rem;
-  }
-}
-
-/* Modo landscape en móviles */
-@media (max-width: 767px) and (orientation: landscape) {
-  .tabla-contenedor {
-    max-height: 50vh;
-  }
-  
-  .tabla-dashboard th,
-  .tabla-dashboard td {
-    min-width: 60px;
-    padding: 4px 3px;
-    font-size: 0.7rem;
-  }
-}
-
-/* === MEJORAS DE RENDIMIENTO === */
-.tabla-dashboard {
-  transform: translateZ(0); /* Aceleración GPU */
-  backface-visibility: hidden;
-}
-
-/* === ESTADOS DE CARGA === */
-.tabla-contenedor.cargando {
-  opacity: 0.7;
-  pointer-events: none;
-}
-
-.tabla-contenedor.vacia {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 200px;
-  background-color: var(--color-panel);
-}
-
-/* === INDICADOR DE SCROLL === */
-.tabla-contenedor::after {
-  content: "→";
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  color: var(--color-primary);
-  opacity: 0.6;
-  font-size: 1.2rem;
-  pointer-events: none;
-  display: none;
-}
-
-@media (max-width: 767px) {
-  .tabla-contenedor::after {
-    display: block;
-    animation: pulse 2s infinite;
-  }
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 0.8; }
 }
 
 /* === DROPDOWN DE FILTROS EN TABLA === */
@@ -940,6 +625,7 @@ body {
   justify-content: center;
   gap: 8px;
   min-height: 40px;
+  flex-wrap: wrap;
 }
 
 .dropdown-container {
@@ -960,6 +646,7 @@ body {
   font-size: 12px;
   transition: all 0.2s ease;
   padding: 0;
+  flex-shrink: 0;
 }
 
 .dropdown-btn:hover {
@@ -1054,7 +741,7 @@ body {
 
 /* === BOTONES DE NAVEGACIÓN === */
 .btn-navegacion-superior {
-  position: absolute;
+  position: fixed;
   right: 20px;
   top: 20px;
   z-index: 9999;
@@ -1094,10 +781,11 @@ body {
 .texto-cargando,
 .texto-vacio {
   text-align: center;
-  margin: 2rem 0;
+  margin: var(--spacing-lg) 0;
   color: var(--color-text-secondary);
   font-size: 1.1rem;
   padding: 20px;
+  width: 100%;
 }
 
 .texto-cargando {
@@ -1130,17 +818,55 @@ body {
     transform: translateX(0);
   }
 }
+/* ============================================= */
+/* 🔹 SECCIÓN RESPONSIVE DESIGN - BREAKPOINTS    */
+/* ============================================= */
 
-/* === ESTILOS RESPONSIVE === */
-
-/* Tablet (768px - 1024px) */
-@media (max-width: 1024px) {
+/* === PANTALLAS GRANDES (1200px+) === */
+@media (min-width: 1201px) {
   .dashboard-container {
-    padding: 15px;
+    padding: var(--spacing-xl);
+  }
+  
+  .graficas-container {
+    flex-direction: row;
+  }
+  
+  .grafica-item {
+    flex: 1 1 45%;
+  }
+}
+
+/* === DESKTOP (1024px - 1200px) === */
+@media (max-width: 1200px) {
+  .dashboard-container {
+    padding: var(--spacing-lg);
   }
   
   .panel {
-    padding: 1rem;
+    max-width: 100%;
+  }
+  
+  .graficas-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .grafica-item {
+    flex: 1 1 45%;
+    min-width: 400px;
+  }
+}
+
+/* === TABLET (768px - 1024px) === */
+@media (max-width: 1024px) {
+  .dashboard-container {
+    padding: var(--spacing-md);
+  }
+  
+  .panel {
+    padding: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
   }
   
   .graficas-container {
@@ -1152,6 +878,7 @@ body {
   .grafica-item {
     flex: 1 1 100%;
     padding: 20px;
+    min-width: auto;
   }
   
   .contadores {
@@ -1162,6 +889,7 @@ body {
   .contador-item {
     min-width: 110px;
     padding: 6px 10px;
+    flex: 0 1 calc(33.333% - 10px);
   }
   
   .filtro-cuadro {
@@ -1171,10 +899,43 @@ body {
   .columna-boton {
     font-size: 12px;
     padding: 6px 12px;
+    flex: 0 1 calc(50% - 10px);
   }
   
+  /* 🔹 ARREGLO ESPECÍFICO PARA TABLA EN 1024px */
   .tabla-contenedor {
     max-height: 50vh;
+    font-size: 12px;
+    overflow-x: auto;
+  }
+  
+  .tabla-dashboard {
+    font-size: 11px;
+    min-width: 100%;
+    table-layout: auto;
+  }
+  
+  .tabla-dashboard th,
+  .tabla-dashboard td {
+    padding: 8px 6px;
+    font-size: 11px;
+    white-space: nowrap;
+    min-width: 80px;
+  }
+  
+  .th-content {
+    min-width: 80px;
+    flex-wrap: nowrap;
+  }
+  
+  .th-content span {
+    font-size: 10px;
+  }
+  
+  .dropdown-btn {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
   }
   
   .btn-navegacion-superior,
@@ -1184,29 +945,47 @@ body {
   
   .panel-buttons {
     flex-direction: column;
+    align-items: center;
   }
   
   .btn-primario, .btn-peligro {
     width: 100%;
+    max-width: 300px;
     text-align: center;
     justify-content: center;
   }
+  
+  .buscador-container {
+    justify-content: center;
+  }
+  
+  .input-busqueda {
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .leyenda-vendedores {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
 }
 
-/* Móvil (480px - 767px) */
+/* === MÓVIL GRANDE (480px - 767px) === */
 @media (max-width: 767px) {
   .dashboard-container {
-    padding: 10px;
+    padding: var(--spacing-sm);
   }
   
   .panel {
-    padding: 0.8rem;
+    padding: var(--spacing-xs);
     border-radius: 8px;
   }
   
   .panel-header {
     flex-direction: column;
     text-align: center;
+    gap: 10px;
   }
   
   .panel-header h2 {
@@ -1215,6 +994,7 @@ body {
   
   .nombre h2 {
     font-size: 1.2rem;
+    text-align: center;
   }
   
   .graficas-container {
@@ -1223,7 +1003,8 @@ body {
   }
   
   .grafica-item {
-    padding: 15px;
+    padding: 15px 10px 100px 10px;
+    min-height: 250px;
   }
   
   .grafica-item h4 {
@@ -1236,23 +1017,27 @@ body {
   
   .contadores {
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
+    gap: 8px;
   }
   
   .contador-item {
     width: 100%;
-    max-width: 200px;
+    max-width: none;
+    flex: 1 1 100%;
   }
   
   .filtro-cuadro {
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
+    gap: 8px;
   }
   
   .columna-boton {
     width: 100%;
-    max-width: 200px;
-    margin-bottom: 5px;
+    max-width: none;
+    margin-bottom: 0;
+    flex: 1 1 100%;
   }
   
   .buscador-container {
@@ -1263,14 +1048,21 @@ body {
   
   .input-busqueda {
     width: 100%;
+    max-width: none;
   }
   
-  .panel-vendedores,
-  .panel-vendedores-secundario {
-    width: 90vw;
-    max-width: 300px;
-    left: 50%;
-    transform: translateX(-50%);
+  /* 🔹 MEJORA: FILTRO VENDEDORES EN MÓVIL */
+  .panel-vendedores {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 90vw !important;
+    max-width: 350px !important;
+    max-height: 70vh !important;
+    z-index: 10000 !important;
+    background: #1f1e1e !important;
+    border: 2px solid var(--color-primary) !important;
   }
   
   .checkbox-list {
@@ -1283,26 +1075,43 @@ body {
   }
   
   .leyenda-vendedores {
-    flex-direction: column;
-    gap: 8px;
-    text-align: center;
     padding: 10px;
   }
   
   .texto-leyenda {
-    font-size: 13px;
+    font-size: 14px;
   }
   
+  /* 🔹 ENCABEZADO FIJO EN MÓVIL - CORREGIDO */
   .tabla-contenedor {
-    max-height: 40vh;
+    max-height: 50vh;
     font-size: 12px;
+    position: relative;
+    overflow: auto;
   }
   
   .tabla-dashboard {
     font-size: 11px;
-    display: block;
+    display: table;
+    width: 100%;
     overflow-x: auto;
     white-space: nowrap;
+    border-collapse: collapse;
+  }
+  
+  .tabla-dashboard thead {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  
+  .tabla-dashboard thead th {
+    position: sticky;
+    top: 0;
+    background-color: var(--color-background) !important;
+    z-index: 101;
+    border-bottom: 2px solid var(--color-primary);
+    padding: 8px 4px;
   }
   
   .tabla-dashboard th,
@@ -1311,14 +1120,20 @@ body {
     font-size: 11px;
   }
   
+  /* 🔹 MEJORA: DROPDOWNS EN MÓVIL */
   .dropdown-menu {
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 90vw;
-    max-width: 300px;
-    z-index: 10001;
+    position: fixed !important;
+    left: 5% !important;
+    right: 5% !important;
+    top: 15% !important;
+    width: 90% !important;
+    max-width: none !important;
+    max-height: 60vh;
+    overflow-y: auto;
+    z-index: 10001 !important;
+    transform: none !important;
+    background: #1f1e1e;
+    border: 2px solid var(--color-primary);
   }
   
   .btn-primario, 
@@ -1329,38 +1144,106 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 14px;
   }
   
   .checkbox-item {
     min-height: 44px;
   }
+  
+  .filtro-vendedor {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .vendedores-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .btn-toggle-vendedores {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  /* 🔹 MEJORA: BOTONES FLOTANTES MÓVIL */
+  .btn-navegacion-superior {
+    display: none;
+  }
+  
+  .btn-navegacion-inferior {
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+  }
+  
+  .btn-navegacion-movil {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+    background: var(--color-primary);
+    color: #121212;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
 }
 
-/* Móvil muy pequeño (menos de 480px) */
+/* === MÓVIL PEQUEÑO (menos de 480px) === */
 @media (max-width: 480px) {
   .dashboard-container {
-    padding: 5px;
+    padding: 8px;
   }
   
   .panel {
-    padding: 0.5rem;
+    padding: 10px;
+    margin-bottom: 15px;
   }
   
   .graficas-container {
     padding: 10px;
+    gap: 10px;
   }
   
   .grafica-item {
-    padding: 10px;
+    padding: 10px 10px 100px 0px;
+    min-height: 320px;
   }
   
   .grafica-item .recharts-responsive-container {
     height: 180px !important;
   }
   
+  /* 🔹 MEJORA: CONTADORES 2 POR FILA */
+  .contadores {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  
   .contador-item {
+    flex: 0 1 calc(50% - 5px);
     min-width: auto;
-    width: 100%;
+    width: auto;
+    padding: 8px 6px;
+    font-size: 0.9rem;
+  }
+  
+  .contador-label {
+    font-size: 0.7rem;
+  }
+  
+  .contador-valor {
+    font-size: 1rem;
   }
   
   .vendedores-wrapper {
@@ -1368,13 +1251,83 @@ body {
   }
   
   .btn-toggle-vendedores {
-    padding: 8px 14px;
+    padding: 12px 14px;
     font-size: 14px;
     width: 100%;
   }
+  
+  .saldo-panel {
+    font-size: 1rem;
+    padding: 8px 12px;
+  }
+  
+  .cupo-disponible-panel {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+  
+  .panel-buttons {
+    gap: 8px;
+  }
+  
+  .btn-primario, .btn-peligro {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+  
+  .texto-cargando,
+  .texto-vacio {
+    font-size: 1rem;
+    padding: 15px;
+  }
+  
+  /* 🔹 MEJORA: ESPACIADO MÓVIL PEQUEÑO */
+  .leyenda-vendedores {
+    padding: 8px 10px;
+  }
+  
+  .texto-leyenda {
+    font-size: 13px;
+  }
+  
+  .filtro-cuadro {
+    padding: 8px;
+  }
+  
+  .columna-boton {
+    padding: 10px 8px;
+    font-size: 12px;
+  }
+  
+  /* 🔹 ENCABEZADO FIJO EN MÓVIL PEQUEÑO - CORREGIDO */
+  .tabla-contenedor {
+    max-height: 40vh;
+  }
+  
+  .tabla-dashboard thead th {
+    padding: 6px 3px;
+    font-size: 10px;
+  }
+  
+  .tabla-dashboard th,
+  .tabla-dashboard td {
+    padding: 4px 3px;
+    font-size: 10px;
+  }
+  
+  .th-content span {
+    font-size: 9px;
+  }
+  
+  .dropdown-btn {
+    width: 18px;
+    height: 18px;
+    font-size: 9px;
+  }
 }
 
-/* Tablet en landscape */
+/* === TABLET EN LANDSCAPE === */
 @media (max-width: 1024px) and (orientation: landscape) {
   .graficas-container {
     flex-direction: row;
@@ -1388,9 +1341,83 @@ body {
   .tabla-contenedor {
     max-height: 45vh;
   }
+  
+  /* 🔹 ENCABEZADO FIJO EN LANDSCAPE */
+  .tabla-dashboard thead {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  
+  .tabla-dashboard thead th {
+    position: sticky;
+    top: 0;
+    background-color: var(--color-background) !important;
+    z-index: 101;
+  }
+  
+  /* 🔹 MEJORA: GRÁFICAS EN LANDSCAPE */
+  .grafica-item .recharts-responsive-container {
+    height: 180px !important;
+  }
 }
 
-/* Mejoras de accesibilidad */
+/* === MÓVIL EN LANDSCAPE === */
+@media (max-width: 767px) and (orientation: landscape) {
+  .tabla-contenedor {
+    max-height: 50vh;
+  }
+  
+  .graficas-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .grafica-item {
+    flex: 1 1 45%;
+    min-height: 200px;
+  }
+  
+  .grafica-item .recharts-responsive-container {
+    height: 150px !important;
+  }
+  
+  /* 🔹 MEJORA: CONTADORES EN LANDSCAPE */
+  .contadores {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .contador-item {
+    flex: 0 1 calc(25% - 8px);
+    min-width: auto;
+  }
+  
+  /* 🔹 ENCABEZADO FIJO EN LANDSCAPE MÓVIL */
+  .tabla-dashboard thead {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  
+  .tabla-dashboard thead th {
+    position: sticky;
+    top: 0;
+    background-color: var(--color-background) !important;
+    z-index: 101;
+  }
+  
+  /* 🔹 MEJORA: MENÚS EN LANDSCAPE */
+  .panel-vendedores {
+    max-height: 80vh !important;
+  }
+  
+  .dropdown-menu {
+    max-height: 70vh !important;
+  }
+}
+
+/* === MEJORAS DE ACCESIBILIDAD === */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
@@ -1413,5 +1440,88 @@ input:focus-visible {
     --color-danger: #ff0000;
     --color-warning: #ffff00;
     --color-success: #00ff00;
+    --color-text: #000000;
+    --color-background: #ffffff;
+  }
+}
+
+/* Modo oscuro del sistema */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: #0d1b2a;
+    --color-panel: #1b263b;
+    --color-text: #ffffff;
+  }
+}
+
+/* === UTILIDADES RESPONSIVE ADICIONALES === */
+.mobile-only {
+  display: none;
+}
+
+.desktop-only {
+  display: block;
+}
+
+@media (max-width: 767px) {
+  .mobile-only {
+    display: block;
+  }
+  
+  .desktop-only {
+    display: none;
+  }
+}
+
+/* Scroll suave para dispositivos táctiles */
+.tabla-contenedor {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Prevenir zoom en inputs en iOS */
+@media (max-width: 767px) {
+  input, select, textarea {
+    font-size: 16px;
+  }
+}
+
+/* 🔹 CLASE NUEVA PARA BOTÓN FLOTANTE MÓVIL */
+.btn-navegacion-movil {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .btn-navegacion-movil {
+    display: flex;
+  }
+}
+
+/* 🔹 OVERLAY PARA MODALES EN MÓVIL */
+.modal-overlay {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .modal-overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+  }
+  
+  .panel-vendedores::before,
+  .dropdown-menu::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
   }
 }

@@ -103,7 +103,7 @@ const Dashboard = () => {
             <ResponsiveContainer width="100%" height={250}>
               <BarChart
                 data={datosGraficaConTotal}
-                margin={{ top: 20, right: 30, left: 50, bottom: 10 }}
+                margin={{ top: 20, right: 10, left: 10, bottom: 10 }}
               >
                 <CartesianGrid strokeDasharray="3 3" stroke="#444" />
                 <XAxis
@@ -168,7 +168,7 @@ const Dashboard = () => {
             <ResponsiveContainer width="100%" height={250}>
               <BarChart
                 data={datosGraficaConTotal}
-                margin={{ top: 20, right: 5, left: 60, bottom: 20 }}
+                margin={{ top: 20, right: 10, left: 10, bottom: 10 }}
               >
                 <CartesianGrid strokeDasharray="3 3" stroke="#444" />
                 <XAxis
