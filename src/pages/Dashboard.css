@@ -1386,7 +1386,6 @@ body {
   }
   
   .cupo-disponible-panel {
-   
     gap: 1px; /* 🔹 AUMENTADO: Más espacio */
   }
   
@@ -1421,9 +1420,20 @@ body {
   }
   
   .columna-boton {
-    padding: 36px 24px; /* 🔹 AUMENTADO: Botones más grandes */
-    font-size: 24px; /* 🔹 AUMENTADO: Texto más grande */
-    min-height: 55px; /* 🔹 NUEVO: Altura mínima */
+    padding: 24px; /* 🔹 AUMENTADO: Botones más grandes */
+    font-size: 18px; /* 🔹 AUMENTADO: Texto más grande */
+    width: 80%;
+    margin: 0 10px 0 10px;
+   
+   
+  }
+
+  .columnas-panel {
+    max-width: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
   }
   
   /* 🔹 TABLA MÁS LEGIBLE EN MÓVIL PEQUEÑO */

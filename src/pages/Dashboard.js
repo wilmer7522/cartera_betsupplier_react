@@ -446,7 +446,6 @@ const Dashboard = () => {
       </div>
 
       <div className="columnas-panel">
-        <h4>Filtro de Zonas</h4>
         <div className="filtro-cuadro">
           {GRUPO_ZONAS.map((col) => (
             <button
