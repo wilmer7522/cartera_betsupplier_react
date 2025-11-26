@@ -966,7 +966,7 @@ body {
   /* 🔹 BOTONES DE ZONA FILTRO MÁS GRANDES EN TABLET */
   .filtro-cuadro {
     justify-content: center;
-    gap: 20px; /* 🔹 AUMENTADO: Más espacio entre botones */
+    gap: 10px; /* 🔹 AUMENTADO: Más espacio entre botones */
     padding: 25px; /* 🔹 AUMENTADO: Más padding interno */
   }
   
