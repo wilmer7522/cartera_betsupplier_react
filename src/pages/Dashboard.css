@@ -857,7 +857,6 @@ body {
     min-width: 400px;
   }
 }
-
 /* === TABLET (768px - 1024px) === */
 @media (max-width: 1024px) {
   .dashboard-container {
@@ -880,94 +879,187 @@ body {
     padding: 20px;
     min-width: auto;
   }
+
+   .saldo-panel {
+    font-size: 1.8rem; /* 🔹 AUMENTADO: Texto más grande */
+    padding: 24px 30px; /* 🔹 AUMENTADO: Más padding */
+    min-width: 100%; /* 🔹 NUEVO: Ocupa todo el ancho */
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Estados del Cupo */
+.estado-cupo {
+  font-weight: bold;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 1.9rem;
+  text-transform: uppercase;
+}
+
+    .vendedores-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+   .btn-toggle-vendedores {
+    width: 500px; /* 🔹 AUMENTADO: Botón más ancho */
+    padding: 16px 20px; /* 🔹 AUMENTADO: Botón más grande */
+    font-size: 24px; /* 🔹 AUMENTADO: Texto más grande */
+    min-height: 85px; /* 🔹 NUEVO: Altura mínima */
+  }
+
+  .panel-vendedores {
+    top: 100% !important;
+    left: 50% !important;
+    width: 90vw !important;
+    max-width: 650px !important;
+    max-height: 100vh !important;
+    z-index: 10000 !important;
+    background: #1f1e1e !important;
+    border: 2px solid var(--color-primary) !important;
+  }
+
+  .checkbox-list {
+    max-height: 200px;
+  }
   
+  .checkbox-item {
+    font-size: 24px; /* 🔹 AUMENTADO: Texto más grande */
+    padding: 12px 10px; /* 🔹 AUMENTADO: Items más grandes */
+    min-height: 60px; /* 🔹 NUEVO: Altura mínima */
+  }
+
+  .btn-todos {
+  padding: 10px 20px;
+  font-size: 24px;
+}
+  
+  /* 🔹 CONTADORES MÁS GRANDES EN TABLET */
   .contadores {
     justify-content: center;
-    gap: 10px;
+    gap: 20px; /* 🔹 AUMENTADO: Más espacio entre contadores */
+    margin: 10px 0;
   }
   
   .contador-item {
-    min-width: 110px;
-    padding: 6px 10px;
-    flex: 0 1 calc(33.333% - 10px);
+    min-width: 440px; /* 🔹 AUMENTADO: Cajas más anchas */
+    padding: 12px 15px; /* 🔹 AUMENTADO: Más padding interno */
+    flex: 0 1 calc(33.333% - 15px);
+    min-height: 80px; /* 🔹 NUEVO: Altura mínima para mejor visual */
   }
   
+  .contador-label {
+    display: block;
+    font-size: 1.5rem; /* 🔹 AUMENTADO: Texto más grande */
+    color: var(--color-text-secondary);
+    margin-bottom: 6px;
+  }
+  
+  .contador-valor {
+    font-weight: bold;
+    font-size: 1.8rem; /* 🔹 AUMENTADO: Números mucho más grandes */
+    color: var(--color-warning);
+  }
+  
+  /* 🔹 BOTONES DE ZONA FILTRO MÁS GRANDES EN TABLET */
   .filtro-cuadro {
     justify-content: center;
+    gap: 20px; /* 🔹 AUMENTADO: Más espacio entre botones */
+    padding: 25px; /* 🔹 AUMENTADO: Más padding interno */
   }
   
   .columna-boton {
-    font-size: 12px;
-    padding: 6px 12px;
-    flex: 0 1 calc(50% - 10px);
+
+    font-size: 24px; /* 🔹 AUMENTADO: Texto más legible */
+    padding: 24px 36px; /* 🔹 AUMENTADO: Botones más grandes */
+    flex: 0 1 calc(50% - 12px);
+    
+    min-width: 440px;
+    font-weight: 900; /* 🔹 NUEVO: Texto más grueso */
   }
   
-  /* 🔹 ARREGLO ESPECÍFICO PARA TABLA EN 1024px */
+  /* 🔹 BOTONES GENERALES MÁS GRANDES EN TABLET */
+  .btn-primario, .btn-peligro {
+    width: 100%;
+    max-width: 450px; /* 🔹 AUMENTADO: Botones más anchos */
+    text-align: center;
+    justify-content: center;
+    padding: 12px 20px; /* 🔹 AUMENTADO: Más padding */
+    font-size: 24px; /* 🔹 AUMENTADO: Texto más grande */
+    min-height: 80px; /* 🔹 NUEVO: Altura mínima consistente */
+  }
+  
+  .panel-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px; /* 🔹 AUMENTADO: Más espacio entre botones */
+  }
+  
+  /* 🔹 BUSCADOR MÁS GRANDE EN TABLET */
+  .buscador-container {
+    justify-content: center;
+    gap: 12px; /* 🔹 AUMENTADO: Más espacio */
+  }
+  
+  .input-busqueda {
+    width: 100%;
+    max-width: 650px; /* 🔹 AUMENTADO: Input más ancho */
+    padding: 12px 15px; /* 🔹 AUMENTADO: Input más alto */
+    font-size: 36px; /* 🔹 AUMENTADO: Texto más grande */
+  }
+  
+  .leyenda-vendedores {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px; /* 🔹 AUMENTADO: Más espacio */
+    padding: 25px; /* 🔹 AUMENTADO: Más padding */
+  }
+  
+  .texto-leyenda {
+    font-size: 26px; /* 🔹 AUMENTADO: Texto más grande */
+  }
+  
+  /* 🔹 TABLA MÁS LEGIBLE EN TABLET */
   .tabla-contenedor {
     max-height: 50vh;
-    font-size: 12px;
+    font-size: 13px; /* 🔹 AUMENTADO: Texto más legible */
     overflow-x: auto;
   }
   
   .tabla-dashboard {
-    font-size: 11px;
+    font-size: 12px; /* 🔹 AUMENTADO: Texto de tabla más grande */
     min-width: 100%;
     table-layout: auto;
   }
   
   .tabla-dashboard th,
   .tabla-dashboard td {
-    padding: 8px 6px;
-    font-size: 11px;
+    padding: 10px 8px; /* 🔹 AUMENTADO: Celdas más espaciosas */
+    font-size: 20px; /* 🔹 AUMENTADO: Texto más legible */
     white-space: nowrap;
-    min-width: 80px;
+    min-width: 90px; /* 🔹 AUMENTADO: Columnas más anchas */
   }
   
   .th-content {
-    min-width: 80px;
+    min-width: 50px; /* 🔹 AUMENTADO: Encabezados más anchos */
     flex-wrap: nowrap;
   }
   
   .th-content span {
-    font-size: 10px;
+    font-size: 20px; /* 🔹 AUMENTADO: Texto de encabezado más grande */
   }
   
   .dropdown-btn {
-    width: 20px;
-    height: 20px;
-    font-size: 10px;
+    width: 24px; /* 🔹 AUMENTADO: Botón más grande */
+    height: 24px; /* 🔹 AUMENTADO: Botón más grande */
+    font-size: 12px; /* 🔹 AUMENTADO: Icono más grande */
   }
   
   .btn-navegacion-superior,
   .btn-navegacion-inferior {
     display: none;
-  }
-  
-  .panel-buttons {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .btn-primario, .btn-peligro {
-    width: 100%;
-    max-width: 300px;
-    text-align: center;
-    justify-content: center;
-  }
-  
-  .buscador-container {
-    justify-content: center;
-  }
-  
-  .input-busqueda {
-    width: 100%;
-    max-width: 400px;
-  }
-  
-  .leyenda-vendedores {
-    flex-direction: column;
-    text-align: center;
-    gap: 8px;
   }
 }
 
@@ -1015,22 +1107,36 @@ body {
     height: 200px !important;
   }
   
+  /* 🔹 CONTADORES MÁS GRANDES EN MÓVIL GRANDE */
   .contadores {
     flex-direction: column;
     align-items: stretch;
-    gap: 8px;
+    gap: 10px; /* 🔹 AUMENTADO: Más espacio entre contadores */
   }
   
   .contador-item {
     width: 100%;
     max-width: none;
     flex: 1 1 100%;
+    padding: 14px 12px; /* 🔹 AUMENTADO: Cajas más grandes */
+    min-height: 70px; /* 🔹 NUEVO: Altura mínima aumentada */
   }
   
+  .contador-label {
+    font-size: 1rem; /* 🔹 AUMENTADO: Texto más grande */
+    margin-bottom: 8px; /* 🔹 AUMENTADO: Más espacio */
+  }
+  
+  .contador-valor {
+    font-size: 1.5rem; /* 🔹 AUMENTADO: Números mucho más grandes */
+  }
+  
+  /* 🔹 BOTONES DE ZONA FILTRO MÁS GRANDES EN MÓVIL GRANDE */
   .filtro-cuadro {
     flex-direction: column;
     align-items: stretch;
-    gap: 8px;
+    gap: 10px; /* 🔹 AUMENTADO: Más espacio entre botones */
+    padding: 15px; /* 🔹 AUMENTADO: Más padding interno */
   }
   
   .columna-boton {
@@ -1038,6 +1144,10 @@ body {
     max-width: none;
     margin-bottom: 0;
     flex: 1 1 100%;
+    padding: 16px 20px; /* 🔹 AUMENTADO: Botones mucho más grandes */
+    font-size: 16px; /* 🔹 AUMENTADO: Texto más grande */
+    min-height: 55px; /* 🔹 NUEVO: Altura mínima para fácil toque */
+    font-weight: 600; /* 🔹 NUEVO: Texto más grueso */
   }
   
   .buscador-container {
@@ -1049,20 +1159,18 @@ body {
   .input-busqueda {
     width: 100%;
     max-width: none;
+    padding: 14px 16px; /* 🔹 AUMENTADO: Input más grande */
+    font-size: 16px; /* 🔹 AUMENTADO: Texto más grande */
   }
   
   /* 🔹 MEJORA: FILTRO VENDEDORES EN MÓVIL */
   .panel-vendedores {
-    position: fixed !important;
-    top: 50% !important;
+    top: 100% !important;
     left: 50% !important;
-    transform: translate(-50%, -50%) !important;
     width: 90vw !important;
     max-width: 350px !important;
     max-height: 70vh !important;
     z-index: 10000 !important;
-    background: #1f1e1e !important;
-    border: 2px solid var(--color-primary) !important;
   }
   
   .checkbox-list {
@@ -1070,28 +1178,29 @@ body {
   }
   
   .checkbox-item {
-    font-size: 12px;
-    padding: 8px;
+    font-size: 14px; /* 🔹 AUMENTADO: Texto más grande */
+    padding: 12px 10px; /* 🔹 AUMENTADO: Items más grandes */
+    min-height: 50px; /* 🔹 NUEVO: Altura mínima */
   }
   
   .leyenda-vendedores {
-    padding: 10px;
+    padding: 12px 15px; /* 🔹 AUMENTADO: Más padding */
   }
   
   .texto-leyenda {
-    font-size: 14px;
+    font-size: 15px; /* 🔹 AUMENTADO: Texto más grande */
   }
   
-  /* 🔹 ENCABEZADO FIJO EN MÓVIL - CORREGIDO */
+  /* 🔹 TABLA MÁS LEGIBLE EN MÓVIL GRANDE */
   .tabla-contenedor {
     max-height: 50vh;
-    font-size: 12px;
+    font-size: 14px; /* 🔹 AUMENTADO: Texto más legible */
     position: relative;
     overflow: auto;
   }
   
   .tabla-dashboard {
-    font-size: 11px;
+    font-size: 13px; /* 🔹 AUMENTADO: Texto de tabla más grande */
     display: table;
     width: 100%;
     overflow-x: auto;
@@ -1111,13 +1220,14 @@ body {
     background-color: var(--color-background) !important;
     z-index: 101;
     border-bottom: 2px solid var(--color-primary);
-    padding: 8px 4px;
+    padding: 12px 6px; /* 🔹 AUMENTADO: Encabezados más altos */
+    font-size: 12px; /* 🔹 AUMENTADO: Texto más grande */
   }
   
   .tabla-dashboard th,
   .tabla-dashboard td {
-    padding: 6px 4px;
-    font-size: 11px;
+    padding: 10px 6px; /* 🔹 AUMENTADO: Celdas más espaciosas */
+    font-size: 12px; /* 🔹 AUMENTADO: Texto más legible */
   }
   
   /* 🔹 MEJORA: DROPDOWNS EN MÓVIL */
@@ -1136,25 +1246,32 @@ body {
     border: 2px solid var(--color-primary);
   }
   
+  .dropdown-menu button {
+    padding: 14px 16px; /* 🔹 AUMENTADO: Items más grandes */
+    font-size: 14px; /* 🔹 AUMENTADO: Texto más grande */
+  }
+  
+  /* 🔹 BOTONES GENERALES MÁS GRANDES EN MÓVIL GRANDE */
   .btn-primario, 
   .btn-peligro, 
   .btn-toggle-vendedores,
   .columna-boton {
-    min-height: 44px;
+    min-height: 55px; /* 🔹 AUMENTADO: De 44px a 55px */
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
+    font-size: 16px; /* 🔹 AUMENTADO: Texto más grande */
+    padding: 16px 20px; /* 🔹 AUMENTADO: Botones más grandes */
   }
   
   .checkbox-item {
-    min-height: 44px;
+    min-height: 50px; /* 🔹 AUMENTADO: Items más grandes */
   }
   
   .filtro-vendedor {
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 12px; /* 🔹 AUMENTADO: Más espacio */
   }
   
   .vendedores-wrapper {
@@ -1166,6 +1283,8 @@ body {
   .btn-toggle-vendedores {
     width: 100%;
     max-width: 300px;
+    padding: 16px 20px; /* 🔹 AUMENTADO: Botón más grande */
+    font-size: 16px; /* 🔹 AUMENTADO: Texto más grande */
   }
   
   /* 🔹 MEJORA: BOTONES FLOTANTES MÓVIL */
@@ -1188,12 +1307,12 @@ body {
     color: #121212;
     border: none;
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
+    width: 60px; /* 🔹 AUMENTADO: Botón más grande */
+    height: 60px; /* 🔹 AUMENTADO: Botón más grande */
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
+    font-size: 20px; /* 🔹 AUMENTADO: Icono más grande */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   }
 }
@@ -1201,21 +1320,21 @@ body {
 /* === MÓVIL PEQUEÑO (menos de 480px) === */
 @media (max-width: 480px) {
   .dashboard-container {
-    padding: 8px;
+    padding: 10px; /* 🔹 AUMENTADO: Más padding general */
   }
   
   .panel {
-    padding: 10px;
+    padding: 12px; /* 🔹 AUMENTADO: Más padding */
     margin-bottom: 15px;
   }
   
   .graficas-container {
-    padding: 10px;
-    gap: 10px;
+    padding: 12px;
+    gap: 12px;
   }
   
   .grafica-item {
-    padding: 10px 10px 100px 0px;
+    padding: 12px 10px 100px 0px;
     min-height: 320px;
   }
   
@@ -1223,27 +1342,29 @@ body {
     height: 180px !important;
   }
   
-  /* 🔹 MEJORA: CONTADORES 2 POR FILA */
+  /* 🔹 CONTADORES MÁS GRANDES EN MÓVIL PEQUEÑO */
   .contadores {
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 5px;
+    gap: 8px; /* 🔹 AUMENTADO: Más espacio */
   }
   
   .contador-item {
-    flex: 0 1 calc(50% - 5px);
+    flex: 0 1 calc(50% - 8px);
     min-width: auto;
     width: auto;
-    padding: 8px 6px;
-    font-size: 0.9rem;
+    padding: 14px 10px; /* 🔹 AUMENTADO: Cajas más grandes */
+    font-size: 1rem;
+    min-height: 80px; /* 🔹 NUEVO: Altura mínima aumentada */
   }
   
   .contador-label {
-    font-size: 0.7rem;
+    font-size: 0.85rem; /* 🔹 AUMENTADO: Texto más grande */
+    margin-bottom: 8px;
   }
   
   .contador-valor {
-    font-size: 1rem;
+    font-size: 1.5rem; /* 🔹 AUMENTADO: Números mucho más grandes */
   }
   
   .vendedores-wrapper {
@@ -1251,79 +1372,83 @@ body {
   }
   
   .btn-toggle-vendedores {
-    padding: 12px 14px;
-    font-size: 14px;
+    padding: 16px 20px; /* 🔹 AUMENTADO: Botón más grande */
+    font-size: 16px; /* 🔹 AUMENTADO: Texto más grande */
     width: 100%;
+    min-height: 55px; /* 🔹 NUEVO: Altura mínima */
   }
   
   .saldo-panel {
-    font-size: 1rem;
-    padding: 8px 12px;
+    font-size: 1.1rem; /* 🔹 AUMENTADO: Texto más grande */
+    padding: 12px 15px; /* 🔹 AUMENTADO: Más padding */
   }
   
   .cupo-disponible-panel {
     flex-direction: column;
     align-items: flex-start;
-    gap: 5px;
+    gap: 8px; /* 🔹 AUMENTADO: Más espacio */
   }
   
   .panel-buttons {
-    gap: 8px;
+    gap: 10px; /* 🔹 AUMENTADO: Más espacio entre botones */
   }
   
   .btn-primario, .btn-peligro {
-    padding: 10px 12px;
-    font-size: 13px;
+    padding: 16px 20px; /* 🔹 AUMENTADO: Botones más grandes */
+    font-size: 16px; /* 🔹 AUMENTADO: Texto más grande */
+    min-height: 55px; /* 🔹 NUEVO: Altura mínima */
   }
   
   .texto-cargando,
   .texto-vacio {
-    font-size: 1rem;
-    padding: 15px;
+    font-size: 1.1rem; /* 🔹 AUMENTADO: Texto más grande */
+    padding: 20px; /* 🔹 AUMENTADO: Más padding */
   }
   
   /* 🔹 MEJORA: ESPACIADO MÓVIL PEQUEÑO */
   .leyenda-vendedores {
-    padding: 8px 10px;
+    padding: 12px 15px; /* 🔹 AUMENTADO: Más padding */
   }
   
   .texto-leyenda {
-    font-size: 13px;
+    font-size: 14px; /* 🔹 AUMENTADO: Texto más grande */
   }
   
   .filtro-cuadro {
-    padding: 8px;
+    padding: 1px; /* 🔹 AUMENTADO: Más padding */
+    gap: 19px; /* 🔹 AUMENTADO: Más espacio */
   }
   
   .columna-boton {
-    padding: 10px 8px;
-    font-size: 12px;
+    padding: 36px 24px; /* 🔹 AUMENTADO: Botones más grandes */
+    font-size: 24px; /* 🔹 AUMENTADO: Texto más grande */
+    min-height: 55px; /* 🔹 NUEVO: Altura mínima */
   }
   
-  /* 🔹 ENCABEZADO FIJO EN MÓVIL PEQUEÑO - CORREGIDO */
+  /* 🔹 TABLA MÁS LEGIBLE EN MÓVIL PEQUEÑO */
   .tabla-contenedor {
     max-height: 40vh;
   }
   
   .tabla-dashboard thead th {
-    padding: 6px 3px;
-    font-size: 10px;
+    padding: 20px 8px; /* 🔹 AUMENTADO: Encabezados más altos */
+    font-size: 18px; /* 🔹 AUMENTADO: Texto más grande */
   }
   
   .tabla-dashboard th,
   .tabla-dashboard td {
-    padding: 4px 3px;
-    font-size: 10px;
+    padding: 8px 4px; /* 🔹 AUMENTADO: Celdas más espaciosas */
+    font-size: 16px; /* 🔹 AUMENTADO: Texto más legible */
   }
   
   .th-content span {
-    font-size: 9px;
+    font-size: 20px; /* 🔹 AUMENTADO: Texto de encabezado más grande */
   }
   
   .dropdown-btn {
-    width: 18px;
-    height: 18px;
-    font-size: 9px;
+    width: 22px; /* 🔹 AUMENTADO: Botón más grande */
+    height: 22px; /* 🔹 AUMENTADO: Botón más grande */
+    font-size: 11px; /* 🔹 AUMENTADO: Icono más grande */
   }
 }
 
@@ -1391,6 +1516,8 @@ body {
   .contador-item {
     flex: 0 1 calc(25% - 8px);
     min-width: auto;
+    padding: 10px 8px; /* 🔹 AUMENTADO: Contadores más grandes */
+    min-height: 70px; /* 🔹 NUEVO: Altura mínima */
   }
   
   /* 🔹 ENCABEZADO FIJO EN LANDSCAPE MÓVIL */
@@ -1414,114 +1541,5 @@ body {
   
   .dropdown-menu {
     max-height: 70vh !important;
-  }
-}
-
-/* === MEJORAS DE ACCESIBILIDAD === */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
-/* Focus visible para accesibilidad */
-button:focus-visible,
-input:focus-visible {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
-}
-
-/* High contrast mode */
-@media (prefers-contrast: high) {
-  :root {
-    --color-primary: #0000ff;
-    --color-danger: #ff0000;
-    --color-warning: #ffff00;
-    --color-success: #00ff00;
-    --color-text: #000000;
-    --color-background: #ffffff;
-  }
-}
-
-/* Modo oscuro del sistema */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: #0d1b2a;
-    --color-panel: #1b263b;
-    --color-text: #ffffff;
-  }
-}
-
-/* === UTILIDADES RESPONSIVE ADICIONALES === */
-.mobile-only {
-  display: none;
-}
-
-.desktop-only {
-  display: block;
-}
-
-@media (max-width: 767px) {
-  .mobile-only {
-    display: block;
-  }
-  
-  .desktop-only {
-    display: none;
-  }
-}
-
-/* Scroll suave para dispositivos táctiles */
-.tabla-contenedor {
-  -webkit-overflow-scrolling: touch;
-}
-
-/* Prevenir zoom en inputs en iOS */
-@media (max-width: 767px) {
-  input, select, textarea {
-    font-size: 16px;
-  }
-}
-
-/* 🔹 CLASE NUEVA PARA BOTÓN FLOTANTE MÓVIL */
-.btn-navegacion-movil {
-  display: none;
-}
-
-@media (max-width: 767px) {
-  .btn-navegacion-movil {
-    display: flex;
-  }
-}
-
-/* 🔹 OVERLAY PARA MODALES EN MÓVIL */
-.modal-overlay {
-  display: none;
-}
-
-@media (max-width: 767px) {
-  .modal-overlay {
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 9999;
-  }
-  
-  .panel-vendedores::before,
-  .dropdown-menu::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: -1;
   }
 }
