@@ -1386,9 +1386,8 @@ body {
   }
   
   .cupo-disponible-panel {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px; /* 🔹 AUMENTADO: Más espacio */
+   
+    gap: 1px; /* 🔹 AUMENTADO: Más espacio */
   }
   
   .panel-buttons {
