@@ -1422,9 +1422,9 @@ body {
   .columna-boton {
     padding: 24px; /* 🔹 AUMENTADO: Botones más grandes */
     font-size: 18px; /* 🔹 AUMENTADO: Texto más grande */
-    width: 80%;
+    width: 50%;
     margin: 0 10px 0 10px;
-   
+    min-width: 300px;
    
   }
 
