@@ -446,7 +446,7 @@ export const useDashboard = () => {
       .slice(1)
       .reduce((sum, d) => sum + d.cantidad, 0);
     const totalMonto = datosGrafica
-      .slice(1)
+      
       .reduce((sum, d) => sum + d.monto, 0);
 
     return [

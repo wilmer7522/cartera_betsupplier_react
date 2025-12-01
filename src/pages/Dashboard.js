@@ -263,52 +263,86 @@ const Dashboard = () => {
           </div>
 
           {/* CUPO DISPONIBLE */}
+          {/* CUPO DISPONIBLE - SUMANDO TODAS LAS FACTURAS */}
           <div className="saldo-panel cupo-disponible-panel">
             <strong>💰 Cupo Disponible:</strong>&nbsp;
             <span className="saldo-valor">
               {(() => {
                 if (!cupoSeleccionado) return "No disponible";
 
-                const clienteActual = datosConCupo.find(
+                // BUSCAR TODAS las facturas del mismo cliente
+                const facturasCliente = datosConCupo.filter(
                   (d) =>
                     (d.Cliente || "").toString().trim() ===
                     busqueda.toString().trim()
                 );
 
-                if (!clienteActual) return "No disponible";
+                if (facturasCliente.length === 0) return "No encontrado";
 
-                const saldoCliente = parseFloat(clienteActual.Saldo ?? 0);
+                // SUMAR el Saldo de TODAS las facturas
+                const totalSaldoCliente = facturasCliente.reduce(
+                  (sum, factura) => {
+                    const saldo = parseFloat(factura.Saldo ?? 0);
+                    return sum + (isNaN(saldo) ? 0 : saldo);
+                  },
+                  0
+                );
+
                 const cupo = parseFloat(cupoSeleccionado ?? 0);
-                const disponible = cupo - saldoCliente;
+                const disponible = cupo - totalSaldoCliente;
+
+                // DEBUG
+                console.log("🔍 CÁLCULO CORREGIDO:", {
+                  cliente: busqueda,
+                  facturasEncontradas: facturasCliente.length,
+                  totalSaldoCliente: totalSaldoCliente,
+                  cupo: cupo,
+                  disponible: disponible,
+                  calculo: `${cupo} - ${totalSaldoCliente} = ${disponible}`,
+                });
 
                 return formatIntegerWithDots(disponible);
               })()}
             </span>
-            {/* 🔹 Estado basado en facturas vencidas o cupo negativo */}
+            {/* LÓGICA DE ESTADO - TAMBIÉN CORREGIDA */}
             {(() => {
-              const clienteActual = datosConCupo.find(
+              // BUSCAR TODAS las facturas del cliente
+              const facturasCliente = datosConCupo.filter(
                 (d) =>
                   (d.Cliente || "").toString().trim() ===
                   busqueda.toString().trim()
               );
-              if (!clienteActual) return null;
 
-              const tieneVencidas =
-                parseFloat(clienteActual.Venc_0_30 ?? 0) > 0 ||
-                parseFloat(clienteActual.Venc_31_60 ?? 0) > 0 ||
-                parseFloat(clienteActual.Venc_61_90 ?? 0) > 0 ||
-                parseFloat(clienteActual.Venc_91 ?? 0) > 0;
+              if (facturasCliente.length === 0) return null;
+
+              // Verificar si ALGUNA factura tiene vencidas
+              const tieneVencidas = facturasCliente.some((factura) => {
+                return (
+                  parseFloat(factura.Venc_0_30 ?? 0) > 0 ||
+                  parseFloat(factura.Venc_31_60 ?? 0) > 0 ||
+                  parseFloat(factura.Venc_61_90 ?? 0) > 0 ||
+                  parseFloat(factura.Venc_91 ?? 0) > 0
+                );
+              });
+
+              // Calcular total saldo del cliente
+              const totalSaldoCliente = facturasCliente.reduce(
+                (sum, factura) => {
+                  const saldo = parseFloat(factura.Saldo ?? 0);
+                  return sum + (isNaN(saldo) ? 0 : saldo);
+                },
+                0
+              );
 
               let bloqueado = false;
 
-              // Si tiene cupo, puede bloquearse por cupo negativo o por vencidas
               if (cupoSeleccionado) {
-                const saldoCliente = parseFloat(clienteActual.Saldo ?? 0);
                 const cupo = parseFloat(cupoSeleccionado ?? 0);
-                const disponible = cupo - saldoCliente;
+                const disponible = cupo - totalSaldoCliente;
+                // Bloqueado si: NO tiene cupo suficiente O tiene facturas vencidas
                 bloqueado = disponible < 0 || tieneVencidas;
               } else {
-                // Si NO tiene cupo, solo se evalúa por facturas vencidas
+                // Si NO tiene cupo, solo bloqueado por vencidas
                 bloqueado = tieneVencidas;
               }
 
@@ -319,6 +353,13 @@ const Dashboard = () => {
                   }`}
                 >
                   {bloqueado ? "Bloqueado" : "Activo"}
+                  <span
+                    style={{
+                      fontSize: "0.8em",
+                      marginLeft: "5px",
+                      opacity: 0.8,
+                    }}
+                  ></span>
                 </span>
               );
             })()}
