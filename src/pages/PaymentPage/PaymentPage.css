@@ -1,0 +1,1163 @@
+/* ============================================= */
+/* PAYMENTPAGE - UI/UX MEJORADO Y RESPONSIVE     */
+/* ============================================= */
+
+/* === RESET COMPLETO === */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  line-height: 1.4;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+input,
+select,
+textarea {
+  all: unset;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* === VARIABLES CSS - CONSISTENTES CON EL PROYECTO === */
+:root {
+  /* Colores principales */
+  --color-primary: #00bcd4;
+  --color-primary-hover: #0097a7;
+  --color-primary-light: rgba(0, 188, 212, 0.1);
+  --color-danger: #c62828;
+  --color-danger-hover: #b71c1c;
+  --color-warning: #ffd166;
+  --color-success: #4caf50;
+
+  /* Colores de tema oscuro */
+  --color-background: #0d1b2a;
+  --color-panel: #1b263b;
+  --color-panel-dark: #1e2a3b;
+  --color-border: #2b3a55;
+  --color-text: #ffffff;
+  --color-text-secondary: #a0aec0;
+  --color-text-muted: #718096;
+
+  /* Colores específicos */
+  --color-wompi: #784397;
+  --color-wompi-hover: #6a3a87;
+  --color-selected: rgba(0, 188, 212, 0.15);
+  --color-selected-border: #00bcd4;
+
+  /* Sombras */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.5);
+
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+
+  /* Border radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  /* Transiciones */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+  --transition-slow: 0.35s ease;
+
+  /* Breakpoints */
+  --breakpoint-mobile: 480px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1024px;
+}
+
+/* === ESTILOS BASE === */
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================= */
+/* CONTENEDOR PRINCIPAL                         */
+/* ============================================= */
+.payment-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  background-color: var(--color-background);
+  padding: var(--spacing-lg);
+  box-sizing: border-box;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ============================================= */
+/* CAJA PRINCIPAL DE PAGO                       */
+/* ============================================= */
+.payment-box {
+  background-color: var(--color-panel);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: var(--spacing-lg);
+  width: 100%;
+  max-width: 480px;
+  position: relative;
+  border: 1px solid var(--color-border);
+  animation: slideUpFade 0.4s ease-out;
+}
+
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================= */
+/* BOTÓN REGRESAR                               */
+/* ============================================= */
+.back-button {
+  position: absolute;
+  top: var(--spacing-md);
+  left: var(--spacing-md);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-normal);
+  z-index: 10;
+}
+
+.back-button:hover {
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+  transform: translateX(-3px);
+}
+
+.back-button:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* ============================================= */
+/* ENCABEZADO DE LA PÁGINA                      */
+/* ============================================= */
+.payment-header {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+  padding-top: var(--spacing-sm);
+}
+
+.payment-header h2 {
+  margin: 0 0 var(--spacing-xs) 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -0.5px;
+}
+
+.payment-header-subtitle {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.payment-subtitle-label {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.payment-documento {
+  color: var(--color-primary);
+  font-weight: 800;
+  font-size: 2.2rem;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 10px rgba(0, 188, 212, 0.4);
+  padding: 0;
+  border-radius: 0;
+  background-color: transparent;
+  border: none;
+}
+
+/* ============================================= */
+/* SECCIÓN DETALLES DEL PAGO                    */
+/* ============================================= */
+.detalle-pago {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+/* ============================================= */
+/* GRUPOS DE FORMULARIO                         */
+/* ============================================= */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 4px;
+}
+
+.form-group label.required::after {
+  content: " *";
+  color: var(--color-danger);
+}
+
+/* ============================================= */
+/* INPUTS DE FORMULARIO                         */
+/* ============================================= */
+.payment-input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-panel-dark);
+  color: var(--color-text);
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all var(--transition-normal);
+  outline: none;
+}
+
+.payment-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.payment-input:hover {
+  border-color: var(--color-primary-hover);
+}
+
+.payment-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+  background-color: var(--color-panel);
+}
+
+.payment-input.error {
+  border-color: var(--color-danger);
+  box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.2);
+}
+
+.payment-input.input-with-icon {
+  padding-left: 45px;
+}
+
+/* Estilos para campos de visualización (no editables) */
+.payment-input.payment-display {
+  background-color: var(--color-panel);
+  border: 2px solid var(--color-border);
+  color: var(--color-text);
+  cursor: default;
+  user-select: none;
+  font-weight: 600;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+}
+
+.payment-input.payment-display:hover {
+  border-color: var(--color-border);
+  background-color: var(--color-panel);
+  cursor: default;
+}
+
+.payment-input.payment-display:focus {
+  outline: none;
+  box-shadow: none;
+  border-color: var(--color-border);
+}
+
+/* ============================================= */
+/* INPUT CON ÍCONO DE PRECIO                    */
+/* ============================================= */
+.input-icon-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-currency-symbol {
+  position: absolute;
+  left: 16px;
+  color: var(--color-text-secondary);
+  font-weight: 700;
+  font-size: 1.1rem;
+  pointer-events: none;
+  z-index: 1;
+  transition: color var(--transition-normal);
+}
+
+.payment-input:focus + .input-currency-symbol,
+.input-icon-wrapper:focus-within .input-currency-symbol {
+  color: var(--color-primary);
+}
+
+/* ============================================= */
+/* SECCIÓN MONTO A PAGAR                        */
+/* ============================================= */
+.monto-section {
+  margin-bottom: var(--spacing-lg);
+}
+
+.monto-section-title {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-sm);
+}
+
+/* ============================================= */
+/* OPCIONES DE MONTO (RADIO CARDS)              */
+/* ============================================= */
+.monto-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.monto-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  background-color: var(--color-panel-dark);
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.monto-option::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background-color: transparent;
+  transition: background-color var(--transition-normal);
+}
+
+.monto-option:hover {
+  border-color: var(--color-primary-hover);
+  transform: translateX(4px);
+}
+
+.monto-option.selected {
+  border-color: var(--color-primary);
+  background-color: var(--color-selected);
+}
+
+.monto-option.selected::before {
+  background-color: var(--color-primary);
+}
+
+.monto-option-text {
+  font-weight: 500;
+  color: var(--color-text);
+  font-size: 1rem;
+  transition: color var(--transition-normal);
+}
+
+.monto-option.selected .monto-option-text {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.monto-option-amount {
+  font-weight: 700;
+  color: var(--color-text);
+  font-size: 1.1rem;
+  transition: color var(--transition-normal);
+}
+
+.monto-option.selected .monto-option-amount {
+  color: var(--color-primary);
+}
+
+.monto-option-hint {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+/* ============================================= */
+/* SECCIÓN MOTIVO DE PAGO (ANIMADA)              */
+/* ============================================= */
+.motive-section {
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-md);
+  background-color: var(--color-panel-dark);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  /* Configuración de la nueva animación */
+  transform-origin: top center; /* La animación comienza desde la parte superior */
+  animation: dropdownReveal 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+  overflow: hidden; /* Asegura que el contenido no se salga durante la animación */
+}
+
+.motive-section-title {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  /* Pequeño retraso para que el título aparezca después de que la caja empiece a abrirse */
+  opacity: 0;
+  animation: fadeIn 0.3s ease-out 0.1s forwards;
+}
+
+.motive-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  /* Retraso para las opciones */
+  opacity: 0;
+  animation: fadeIn 0.3s ease-out 0.2s forwards;
+}
+
+.motive-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast);
+}
+
+.motive-option:hover {
+  background-color: var(--color-primary-light);
+}
+
+/* Estilo personalizado del Radio Button */
+.motive-option input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--color-border);
+  border-radius: 50%;
+  background-color: var(--color-panel);
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.motive-option input[type="radio"]::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  background-color: var(--color-primary);
+  box-shadow: 0 0 10px var(--color-primary); /* Un poco más de brillo */
+}
+
+.motive-option input[type="radio"]:checked {
+  border-color: var(--color-primary);
+}
+
+.motive-option input[type="radio"]:checked::before {
+  transform: scale(1);
+}
+
+.motive-label {
+  font-size: 0.95rem;
+  color: var(--color-text);
+  font-weight: 500;
+  user-select: none;
+  transition: color var(--transition-fast);
+}
+
+.motive-option input[type="radio"]:checked + .motive-label {
+  color: var(--color-primary);
+}
+
+/* Ajuste para móviles */
+@media (max-width: 480px) {
+  .motive-options {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================= */
+/* DEFINICIÓN DE LA ANIMACIÓN KEYFRAMES          */
+/* ============================================= */
+@keyframes dropdownReveal {
+  0% {
+    opacity: 0;
+    /* Comienza un poco más arriba y comprimido verticalmente */
+    transform: translateY(-20px) scaleY(0.8);
+    max-height: 0; /* Ayuda a que el flujo de la página no salte bruscamente */
+  }
+  1% {
+    /* Liberamos la altura máxima casi inmediatamente */
+    max-height: 500px;
+  }
+  100% {
+    opacity: 1;
+    /* Termina en su posición original y tamaño completo */
+    transform: translateY(0) scaleY(1);
+    max-height: 500px;
+  }
+}
+
+/* Reutilizamos fadeIn si no estaba definido antes */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================= */
+/* INPUT DE MONTO PERSONALIZADO                  */
+/* ============================================= */
+.custom-amount-container {
+  margin-top: var(--spacing-sm);
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================= */
+/* TOTAL A PAGAR                                */
+/* ============================================= */
+.payment-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  border-top: 1px solid var(--color-border);
+}
+
+.payment-total-label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.payment-total-amount {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  letter-spacing: -1px;
+}
+
+/* ============================================= */
+/* BOTÓN DE PAGO WOMPI                          */
+/* ============================================= */
+.payment-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.payment-button {
+  width: 100%;
+  padding: 18px 24px;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.payment-button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.payment-button:hover::after {
+  left: 100%;
+}
+
+.payment-button.wompi {
+  background-color: var(--color-wompi);
+  color: white;
+  box-shadow: var(--shadow-md);
+}
+
+.payment-button.wompi:hover:not(:disabled) {
+  background-color: var(--color-wompi-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.payment-button.wompi:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+.payment-button:disabled,
+.payment-button.loading {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.payment-button:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+/* Logo de Wompi */
+.wompi-logo {
+  height: 28px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  transition: transform var(--transition-normal);
+}
+
+.payment-button:hover .wompi-logo {
+  transform: scale(1.05);
+}
+
+/* Loading spinner */
+.button-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================================= */
+/* FOOTER DE SEGURIDAD                          */
+/* ============================================= */
+.payment-footer {
+  text-align: center;
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--color-border);
+}
+
+.payment-footer-text {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.payment-footer-text svg {
+  width: 14px;
+  height: 14px;
+  fill: var(--color-text-muted);
+}
+
+/* ============================================= */
+/* STATES: ERROR, SUCCESS, WARNING              */
+/* ============================================= */
+.error-message {
+  background-color: rgba(198, 40, 40, 0.1);
+  border: 1px solid var(--color-danger);
+  color: var(--color-danger);
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  margin-bottom: var(--spacing-md);
+  animation: shake 0.4s ease-out;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+.success-message {
+  background-color: rgba(76, 175, 80, 0.1);
+  border: 1px solid var(--color-success);
+  color: var(--color-success);
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  margin-bottom: var(--spacing-md);
+}
+
+/* ============================================= */
+/* LOADING OVERLAY                              */
+/* ============================================= */
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(13, 27, 42, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+  border-radius: var(--radius-lg);
+  z-index: 100;
+}
+
+.loading-spinner {
+  width: 48px;
+  height: 48px;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.loading-text {
+  color: var(--color-text);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+
+
+/* ============================================= */
+/* RESPONSIVE DESIGN                            */
+/* ============================================= */
+
+/* === PANTALLAS GRANDES (1200px+) === */
+@media (min-width: 1201px) {
+  .payment-box {
+    max-width: 520px;
+    padding: var(--spacing-xl);
+  }
+
+  .payment-header h2 {
+    font-size: 1.8rem;
+  }
+
+  .payment-total-amount {
+    font-size: 2rem;
+  }
+}
+
+/* === DESKTOP (1024px - 1200px) === */
+@media (max-width: 1200px) {
+  .payment-page-container {
+    padding: var(--spacing-md);
+  }
+
+  .payment-box {
+    max-width: 500px;
+    padding: var(--spacing-lg);
+  }
+}
+
+/* === TABLET (768px - 1024px) === */
+@media (max-width: 1024px) {
+  .payment-page-container {
+    padding: var(--spacing-md);
+    align-items: flex-start;
+    padding-top: var(--spacing-lg);
+  }
+
+  .payment-box {
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .back-button {
+    position: relative;
+    top: 0;
+    left: 0;
+    margin-bottom: var(--spacing-md);
+    justify-content: flex-start;
+  }
+
+  .payment-header {
+    padding-top: 0;
+  }
+
+  .payment-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .monto-option {
+    padding: 14px;
+  }
+
+  .monto-option-text,
+  .monto-option-amount {
+    font-size: 1rem;
+  }
+
+  .payment-button {
+    padding: 16px 20px;
+    font-size: 1rem;
+  }
+
+  .wompi-logo {
+    height: 24px;
+  }
+}
+
+/* === MÓVIL GRANDE (480px - 767px) === */
+@media (max-width: 767px) {
+  .payment-page-container {
+    padding: var(--spacing-sm);
+    padding-top: var(--spacing-md);
+  }
+
+  .payment-box {
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+  }
+
+  .payment-header h2 {
+    font-size: 1.4rem;
+  }
+
+  .payment-header-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .form-group label {
+    font-size: 0.9rem;
+  }
+
+  .payment-input {
+    padding: 12px 14px;
+    font-size: 1rem;
+  }
+
+  .monto-section-title {
+    font-size: 0.9rem;
+  }
+
+  .monto-option {
+    padding: 14px 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .monto-option-text {
+    font-size: 0.95rem;
+  }
+
+  .monto-option-amount {
+    font-size: 1.1rem;
+    align-self: flex-end;
+  }
+
+  .payment-total {
+    padding-top: var(--spacing-sm);
+  }
+
+  .payment-total-label {
+    font-size: 1rem;
+  }
+
+  .payment-total-amount {
+    font-size: 1.5rem;
+  }
+
+  .payment-button {
+    padding: 14px 16px;
+    font-size: 0.95rem;
+  }
+
+  .wompi-logo {
+    height: 22px;
+  }
+
+  .payment-footer-text {
+    font-size: 0.75rem;
+  }
+}
+
+/* === MÓVIL PEQUEÑO (menos de 480px) === */
+@media (max-width: 480px) {
+  .payment-page-container {
+    padding: var(--spacing-xs);
+  }
+
+  .payment-box {
+    padding: var(--spacing-sm);
+    margin: var(--spacing-xs);
+    width: calc(100% - var(--spacing-sm));
+  }
+
+  .payment-header {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .payment-header h2 {
+    font-size: 1.25rem;
+  }
+
+  .payment-header-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .detalle-pago {
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .form-group label {
+    font-size: 0.85rem;
+  }
+
+  .payment-input {
+    padding: 10px 12px;
+    font-size: 0.95rem;
+  }
+
+  .monto-option {
+    padding: 12px 10px;
+  }
+
+  .monto-option-text {
+    font-size: 0.9rem;
+  }
+
+  .monto-option-amount {
+    font-size: 1rem;
+  }
+
+  .monto-option-hint {
+    font-size: 0.8rem;
+  }
+
+  .custom-amount-container {
+    margin-top: var(--spacing-xs);
+  }
+
+  .payment-total-label {
+    font-size: 0.95rem;
+  }
+
+  .payment-total-amount {
+    font-size: 1.35rem;
+  }
+
+  .payment-button {
+    padding: 12px 14px;
+    font-size: 0.9rem;
+    gap: 8px;
+  }
+
+  .wompi-logo {
+    height: 20px;
+  }
+
+  .payment-footer {
+    margin-top: var(--spacing-sm);
+    padding-top: var(--spacing-sm);
+  }
+
+  .payment-footer-text {
+    font-size: 0.7rem;
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
+/* === TABLET EN LANDSCAPE === */
+@media (max-width: 1024px) and (orientation: landscape) {
+  .payment-page-container {
+    padding: var(--spacing-sm);
+    align-items: center;
+  }
+
+  .payment-box {
+    max-width: 450px;
+    margin: var(--spacing-sm) auto;
+  }
+}
+
+/* === MÓVIL EN LANDSCAPE === */
+@media (max-width: 767px) and (orientation: landscape) {
+  .payment-page-container {
+    padding: var(--spacing-xs);
+    align-items: center;
+  }
+
+  .payment-box {
+    max-width: 100%;
+    width: auto;
+    min-width: 350px;
+    max-width: 500px;
+  }
+
+  .monto-option {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+/* ============================================= */
+/* ACCESSIBILITY - PREFERRED REDUCED MOTION     */
+/* ============================================= */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus visible para navegación por teclado */
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* ============================================= */
+/* MODO DE ALTO CONTRASTE                       */
+/* ============================================= */
+@media (prefers-contrast: high) {
+  :root {
+    --color-border: #ffffff;
+    --color-text-secondary: #ffffff;
+    --color-text-muted: #ffffff;
+  }
+
+  .payment-box {
+    border: 2px solid #ffffff;
+  }
+
+  .payment-input {
+    border-width: 2px;
+  }
+
+  .monto-option {
+    border-width: 2px;
+  }
+}
+
+/* ============================================= */
+/* ESTILOS DE IMPRESIÓN                          */
+/* ============================================= */
+@media print {
+  .payment-page-container {
+    background: white;
+    color: black;
+  }
+
+  .payment-box {
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+
+  .payment-button {
+    background: #ccc;
+    color: black;
+  }
+
+  .wompi-logo {
+    filter: none;
+  }
+}

@@ -49,7 +49,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: var(--spacing-lg);
+  padding: var(--spacing-lg) 20px;
   background-color: var(--color-background);
   position: relative;
   overflow-y: auto;
@@ -417,28 +417,32 @@ body {
 }
 
 /* === CONTENEDOR DE GRÁFICAS === */
+/* === CONTENEDOR DE GRÁFICAS === */
 .graficas-container {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  flex-wrap: nowrap; /* Evita que las gráficas se bajen a menos que sea móvil */
+  justify-content: center;
+  align-items: stretch; /* Hace que ambas tengan la misma altura */
   gap: 25px;
-  width: 100%;
-  max-width: 1640px;
+  
+  width: 100%;        /* Ocupa el 95% de la pantalla */
+  max-width: none;   /* ELIMINA EL LÍMITE de 1600px */
+  
   background-color: var(--color-background);
   border-radius: 12px;
-  padding: 25px;
+  padding: 30px;     /* Más aire interno para que se vea premium */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-  margin-bottom: 30px;
+  margin: 20px auto 30px auto; /* Centrado horizontalmente */
 }
 
 .grafica-item {
-  flex: 1 1 600px;
+  flex: 1;           /* Esto las obliga a crecer y repartirse el espacio 50/50 */
+  min-width: 0;      /* Truco de Flexbox para que el contenido no desborde */
   background-color: #24344d;
-  padding: 25px;
+  padding: 20px;
   border-radius: 10px;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
-  transition: transform 0.2s ease;
-  min-height: 300px;
+  min-height: 400px; /* Un poco más altas para aprovechar el ancho */
 }
 
 .grafica-item h4 {
@@ -773,6 +777,52 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
+/* === PAGINACIÓN === */
+.paginacion-contenedor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 15px 0;
+  background-color: var(--color-panel);
+  border-top: 1px solid var(--color-border);
+  margin-top: 10px;
+}
+
+.btn-paginacion {
+  background-color: var(--color-primary);
+  color: #121212;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  min-width: 100px;
+}
+
+.btn-paginacion:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+  color: var(--color-text);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 188, 212, 0.3);
+}
+
+.btn-paginacion:disabled {
+  background-color: var(--color-border);
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.info-paginacion {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+}
+
+.info-paginacion strong {
+  color: var(--color-primary);
+}
+
 /* === MENSAJES Y ESTADOS === */
 .texto-cargando,
 .texto-vacio {
@@ -793,6 +843,22 @@ body {
 }
 
 /* === ANIMACIONES === */
+/* === SPINNER DE BÚSQUEDA GLOBAL === */
+.buscando-spinner {
+  font-size: 0.85rem;
+  color: var(--color-primary);
+  font-style: italic;
+  animation: pulse 1.5s infinite;
+  white-space: nowrap;
+  margin-left: 10px;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -1553,4 +1619,31 @@ body {
   .dropdown-menu {
     max-height: 70vh !important;
   }
+}
+
+/* Estilos para el botón de Pagar */
+.td-accion {
+  text-align: center;
+}
+
+.btn-pagar {
+  padding: 6px 12px;
+  background-color: var(--color-primary);
+  color: #121212;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.btn-pagar:hover {
+  background-color: var(--color-primary-hover);
+  color: var(--color-text);
+  transform: translateY(-1px);
 }

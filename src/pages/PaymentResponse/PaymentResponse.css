@@ -1,0 +1,99 @@
+
+.payment-response-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f7f6;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.response-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+}
+
+.response-card.approved h2 {
+  color: #2ecc71;
+}
+
+.response-card.declined h2, .response-card.error h2 {
+  color: #e74c3c;
+}
+
+.status-message {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  color: #555;
+}
+
+.payment-details {
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  text-align: left;
+  color: #333; /* Default text color for the container */
+}
+
+.payment-details .detail-item {
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+  display: flex; /* Makes label and value align nicely */
+  justify-content: space-between; /* Pushes label to left, value to right */
+  align-items: center;
+}
+
+.payment-details .detail-item span {
+  color: #555; /* Label color */
+  font-weight: normal;
+}
+
+.payment-details .detail-item strong {
+  color: #333; /* Value color */
+  font-weight: 600;
+  text-align: right;
+  flex-grow: 1; /* Allows value to take up remaining space */
+}
+
+/* Old rule not directly relevant anymore, but keeping for reference if P tags are used elsewhere */
+/* .payment-details p {
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+  color: #333;
+} */
+
+.back-btn {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background-color: #2980b9;
+}
+
+.spinner {
+  margin: 20px auto;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

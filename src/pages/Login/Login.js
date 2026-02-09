@@ -26,12 +26,11 @@ function Login() {
       localStorage.setItem("rol", res.data.rol);
       localStorage.setItem("nombre", res.data.nombre);
 
-      console.log(`Bienvenido ${res.data.nombre} (${res.data.rol})`);
 
       // ✅ Redirección según rol (con recarga para que App.jsx lea los datos)
       if (res.data.rol === "admin") {
         window.location.href = "/admin"; // 🔥 fuerza la carga del panel admin
-      } else if (res.data.rol === "vendedor") {
+      } else if (res.data.rol === "vendedor" || res.data.rol === "cliente") {
         window.location.href = "/dashboard"; // 🔥 fuerza carga del dashboard
       } else {
         alert("Rol desconocido. Contacta al administrador.");
@@ -41,7 +40,7 @@ function Login() {
       console.error("Error al iniciar sesión:", err);
       alert(
         err.response?.data?.detail ||
-          "❌ Credenciales inválidas o error en el servidor"
+          "❌ Credenciales inválidas o error en el servidor",
       );
       setCargando(false);
     }
@@ -52,7 +51,8 @@ function Login() {
       <form onSubmit={handleLogin} className="login-form">
         <h2>🔐 Iniciar Sesión</h2>
 
-        <input id="email"
+        <input
+          id="email"
           type="email"
           placeholder="Correo electrónico"
           value={correo}
@@ -61,7 +61,8 @@ function Login() {
           disabled={cargando}
         />
 
-        <input id="password"
+        <input
+          id="password"
           type="password"
           placeholder="Contraseña"
           value={password}

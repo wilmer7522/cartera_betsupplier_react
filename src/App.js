@@ -1,7 +1,9 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import Login from "./pages/Login";
-import AdminPanel from "./pages/AdminPanel";
-import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Login/Login";
+import AdminPanel from "./pages/AdminPanel/AdminPanel";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import PaymentPage from "./pages/PaymentPage/PaymentPage"; // Import new PaymentPage
+import PaymentResponse from "./pages/PaymentResponse/PaymentResponse"; // Import PaymentResponse
 
 function App() {
   // ✅ Función para verificar token y rol desde localStorage
@@ -55,6 +57,18 @@ function App() {
           element={
             token ? <Dashboard /> : <Navigate to="/login" replace />
           }
+        />
+
+        {/* 💸 PÁGINA DE PAGO - protegida por token */}
+        <Route
+          path="/pagar/:documento"
+          element={token ? <PaymentPage /> : <Navigate to="/login" replace />}
+        />
+
+        {/* ✅ CONFIRMACIÓN DE PAGO */}
+        <Route
+          path="/payment-response"
+          element={<PaymentResponse />}
         />
 
         {/* 🔄 Ruta por defecto */}
