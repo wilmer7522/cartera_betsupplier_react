@@ -39,14 +39,19 @@ const PaymentPage = () => {
   const { Documento, Nombre_Cliente, Cliente, Saldo, fromDashboard } =
     location.state || {};
 
-  const [nombrePagador] = useState(Nombre_Cliente || ""); // Setter removido
-  const [nitPagador] = useState(Cliente || ""); // Setter removido
+  const [nombrePagador] = useState(Nombre_Cliente || "");
+  const [nitPagador] = useState(Cliente || "");
   const [paymentOption, setPaymentOption] = useState("total");
   const [customAmount, setCustomAmount] = useState("");
   const [selectedMotive, setSelectedMotive] = useState(""); 
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const apiUrl = process.env.REACT_APP_API_URL || "https://cartera-betsupplier-backend.onrender.com";
+  // URL de la API (Backend puerto 8000)
+  const apiUrl = process.env.REACT_APP_API_URL || "https://portal.betsupplier.co";
+  
+  // URL del Frontend (Portal puerto 80/443)
+  // Forzamos que la redirección sea a la cara visual del proyecto
+  const frontendUrl = "https://portal.betsupplier.co";
 
   const saldoTotal = typeof Saldo === "number" ? Saldo : 0;
 
@@ -85,17 +90,14 @@ const PaymentPage = () => {
         try {
           const amountInCents = Math.round(montoAPagar * 100);
           
-          // Generación de referencia para incluir tipo y motivo del pago.
-          // Formato: FAC-{Documento}-{timestamp}-{paymentOption}-{motivo}
           const motivoLimpio = (selectedMotive || "").replace(/\s+/g, '_');
           let reference = `FAC-${Documento}-${Date.now()}-${paymentOption}`;
           if (paymentOption === "otro" && motivoLimpio) {
             reference += `-${motivoLimpio}`;
           }
 
-          // La llamada a /pagos/save-intent ha sido eliminada.
-
-          const redirectUrl = `${apiUrl}/pagos/response`;
+          // ✅ CAMBIO CLAVE: La redirección debe ir al componente de React en el Frontend
+          const redirectUrl = `${frontendUrl}/payment-response`;
 
           const response = await fetch(`${apiUrl}/pagos/wompi/signature`, {
             method: "POST",
@@ -104,7 +106,7 @@ const PaymentPage = () => {
               reference,
               amountInCents,
               currency: "COP",
-              redirectUrl,
+              redirectUrl, // Enviamos esta URL al backend para la firma
             }),
           });
 
@@ -115,16 +117,17 @@ const PaymentPage = () => {
 
           const { signature, publicKey } = await response.json();
 
+          // ✅ Construcción de parámetros para el widget de Wompi
           const params = new URLSearchParams({
-            mode: "widget",
             "public-key": publicKey,
             currency: "COP",
             "amount-in-cents": amountInCents.toString(),
             reference: reference,
-            "redirect-url": redirectUrl,
+            "redirect-url": redirectUrl, // Wompi usará esta URL para volver
             "signature:integrity": signature,
           });
 
+          // Redirección al checkout de Wompi
           window.location.href = `https://checkout.wompi.co/p/?${params.toString()}`;
 
         } catch (error) {
@@ -134,7 +137,7 @@ const PaymentPage = () => {
         }
       }
     },
-    [montoAPagar, Documento, paymentOption, selectedMotive, apiUrl]
+    [montoAPagar, Documento, paymentOption, selectedMotive, apiUrl, frontendUrl]
   );
 
   useEffect(() => {
@@ -234,8 +237,16 @@ const PaymentPage = () => {
         </div>
 
         <div className="payment-options">
-          <button className={`payment-button wompi ${isProcessing ? "loading" : ""}`} disabled={isProcessing} onClick={() => iniciarPago("Wompi")}>
-            {isProcessing ? <span className="button-spinner" /> : <>Pagar con <img src={wompiLogo} alt="Wompi" className="wompi-logo" /></>}
+          <button 
+            className={`payment-button wompi ${isProcessing ? "loading" : ""}`} 
+            disabled={isProcessing} 
+            onClick={() => iniciarPago("Wompi")}
+          >
+            {isProcessing ? (
+              <span className="button-spinner" />
+            ) : (
+              <>Pagar con <img src={wompiLogo} alt="Wompi" className="wompi-logo" /></>
+            )}
           </button>
         </div>
       </div>
