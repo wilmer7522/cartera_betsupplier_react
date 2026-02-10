@@ -18,7 +18,7 @@ export const useAdminPanel = () => {
   const [filtro, setFiltro] = useState("todos"); // Este será el filtro por nombre
   const [filtroRol, setFiltroRol] = useState("todos");
   const [fechaReporte, setFechaReporte] = useState(new Date().toISOString().split('T')[0]); // Default today // Nuevo filtro por rol
-  const [fechaReporteFin, setFechaReporteFin] = useState(""); // Nueva fecha de fin
+  const [fechaReporteFin, setFechaReporteFin] = useState(new Date().toISOString().split('T')[0]); // Nueva fecha de fin
 
   const [vendedoresBase, setVendedoresBase] = useState([]);
   const [clientesBase, setClientesBase] = useState([]);

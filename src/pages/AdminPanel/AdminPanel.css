@@ -826,7 +826,7 @@ body {
   gap: var(--spacing-sm);
   box-shadow: var(--shadow-lg);
   width: 100%;
-  max-width: 600px;
+  max-width: 900px;
   text-align: center;
 }
 

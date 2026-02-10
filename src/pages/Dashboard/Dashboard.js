@@ -121,12 +121,6 @@ const Dashboard = () => {
       return;
     }
 
-    const infoPago = {
-      documento: fila.Documento,
-      nombre: fila.Nombre_Cliente,
-      nit: fila.Cliente,
-      saldo: fila.Saldo,
-    };
 
     // Navegar a la página de pago, pasando los datos de la fila completa
     navigate(`/pagar/${fila.Documento}`, {
