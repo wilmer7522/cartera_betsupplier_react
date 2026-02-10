@@ -507,17 +507,23 @@ export const useAdminPanel = () => {
         return;
       }
 
+      // 💡 CORRECTO: Extraer el nombre del archivo del header
+      const disposition = response.headers.get('content-disposition');
+      let nombreArchivo = "Reporte_de_Pagos_Cartera.xlsx"; // Fallback
+      if (disposition && disposition.indexOf('attachment') !== -1) {
+        const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+        const matches = filenameRegex.exec(disposition);
+        if (matches != null && matches[1]) {
+          nombreArchivo = matches[1].replace(/['"]/g, '');
+        }
+      }
+
       const blob = await response.blob();
       const urlBlob = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.style.display = "none";
       a.href = urlBlob;
-
-      // 💡 NUEVO: Nombre de archivo dinámico
-      const nombreArchivo = fechaReporteFin
-        ? `Reporte_Pagos_${fechaReporte}_a_${fechaReporteFin}.xlsx`
-        : `Reporte_Pagos_${fechaReporte}.xlsx`;
-      a.download = nombreArchivo;
+      a.download = nombreArchivo; // Usar el nombre de archivo del header
       
       document.body.appendChild(a);
       a.click();
