@@ -50,6 +50,8 @@ export default function AdminPanel() {
     usuarioSeleccionado,
     fechaReporte,
     setFechaReporte,
+    fechaReporteFin,
+    setFechaReporteFin,
     handleDescargarReportePagos
   } = useAdminPanel();
 
@@ -94,6 +96,13 @@ export default function AdminPanel() {
           type="date" 
           value={fechaReporte} 
           onChange={(e) => setFechaReporte(e.target.value)}
+          className="input-fecha-reporte"
+        />
+        <span style={{ margin: '0 10px' }}>hasta</span>
+        <input 
+          type="date" 
+          value={fechaReporteFin} 
+          onChange={(e) => setFechaReporteFin(e.target.value)}
           className="input-fecha-reporte"
         />
         <button className="btn-primario" onClick={handleDescargarReportePagos}>

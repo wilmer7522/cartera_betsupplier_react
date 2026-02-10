@@ -18,6 +18,7 @@ export const useAdminPanel = () => {
   const [filtro, setFiltro] = useState("todos"); // Este será el filtro por nombre
   const [filtroRol, setFiltroRol] = useState("todos");
   const [fechaReporte, setFechaReporte] = useState(new Date().toISOString().split('T')[0]); // Default today // Nuevo filtro por rol
+  const [fechaReporteFin, setFechaReporteFin] = useState(""); // Nueva fecha de fin
 
   const [vendedoresBase, setVendedoresBase] = useState([]);
   const [clientesBase, setClientesBase] = useState([]);
@@ -487,15 +488,18 @@ export const useAdminPanel = () => {
     }
 
     try {
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/pagos/reporte-excel?fecha=${fechaReporte}`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      // 💡 NUEVO: Construir la URL dinámicamente
+      let url = `${process.env.REACT_APP_API_URL}/pagos/reporte-excel?fecha=${fechaReporte}`;
+      if (fechaReporteFin) {
+        url += `&fechaFin=${fechaReporteFin}`;
+      }
+
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
@@ -504,16 +508,21 @@ export const useAdminPanel = () => {
       }
 
       const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
+      const urlBlob = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.style.display = "none";
-      a.href = url;
-      a.download = `Reporte_Pagos_${fechaReporte}.xlsx`;
+      a.href = urlBlob;
+
+      // 💡 NUEVO: Nombre de archivo dinámico
+      const nombreArchivo = fechaReporteFin
+        ? `Reporte_Pagos_${fechaReporte}_a_${fechaReporteFin}.xlsx`
+        : `Reporte_Pagos_${fechaReporte}.xlsx`;
+      a.download = nombreArchivo;
       
       document.body.appendChild(a);
       a.click();
       
-      window.URL.revokeObjectURL(url);
+      window.URL.revokeObjectURL(urlBlob);
       document.body.removeChild(a);
 
     } catch (error) {
@@ -577,6 +586,8 @@ export const useAdminPanel = () => {
     navigate,
     fechaReporte,
     setFechaReporte,
+    fechaReporteFin,
+    setFechaReporteFin,
     handleDescargarReportePagos
   };
 };
