@@ -4,6 +4,8 @@ import AdminPanel from "./pages/AdminPanel/AdminPanel";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import PaymentPage from "./pages/PaymentPage/PaymentPage"; // Import new PaymentPage
 import PaymentResponse from "./pages/PaymentResponse/PaymentResponse"; // Import PaymentResponse
+import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword/ResetPassword";
 
 function App() {
   // ✅ Función para verificar token y rol desde localStorage
@@ -38,6 +40,10 @@ function App() {
             )
           }
         />
+
+        {/* 🔑 RECUPERAR CONTRASEÑA */}
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
 
         {/* 👑 PANEL ADMIN - solo para admin */}
         <Route

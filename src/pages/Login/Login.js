@@ -74,6 +74,12 @@ function Login() {
         <button id="enter" type="submit" disabled={cargando}>
           {cargando ? "Ingresando..." : "Ingresar"}
         </button>
+
+        <div className="forgot-link" style={{ textAlign: "center", marginTop: "15px" }}>
+          <a href="/forgot-password" style={{ color: "#00bcd4", textDecoration: "none", fontSize: "0.9rem" }}>
+            ¿Olvidaste tu contraseña?
+          </a>
+        </div>
       </form>
     </div>
   );
