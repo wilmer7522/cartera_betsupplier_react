@@ -222,9 +222,17 @@ export const useDashboard = () => {
     (nit) => {
       if (!nit || !nit.toString().trim()) return null;
       const nitBusqueda = normalizeNit(nit);
-      const cupoEncontrado = cupoCartera.find(
-        (c) => normalizeNit(c["Mt_Cliente_Proveedor"]) === nitBusqueda,
-      );
+      const cupoEncontrado = cupoCartera.find((c) => {
+        const nitCupo = normalizeNit(c["Mt_Cliente_Proveedor"]);
+        if (nitCupo === nitBusqueda) return true;
+        // Fallback: Comparar sin el último dígito (posible DV)
+        if (nitCupo.length > 5 && nitBusqueda.length > 5) {
+            if (nitCupo.substring(0, nitCupo.length - 1) === nitBusqueda) return true;
+            if (nitBusqueda.substring(0, nitBusqueda.length - 1) === nitCupo) return true;
+            if (nitCupo.substring(0, nitCupo.length - 1) === nitBusqueda.substring(0, nitBusqueda.length - 1)) return true;
+        }
+        return false;
+      });
 
       if (cupoEncontrado) {
         const raw = cupoEncontrado["Cupo_Credito_Cl"];
@@ -255,12 +263,23 @@ export const useDashboard = () => {
     const cupoMap = new Map();
     cupoCartera.forEach(c => {
         const nit = normalizeNit(c["Mt_Cliente_Proveedor"]);
-        if (nit) cupoMap.set(nit, c);
+        if (nit) {
+            cupoMap.set(nit, c);
+            // También indexar el NIT sin DV para mayor compatibilidad
+            if (nit.length > 5) {
+                cupoMap.set(nit.substring(0, nit.length - 1), c);
+            }
+        }
     });
 
     return datos.map((item) => {
       const nitBase = normalizeNit(item.Cliente);
-      const cupoRelacionado = cupoMap.get(nitBase);
+      let cupoRelacionado = cupoMap.get(nitBase);
+      
+      // Si no hay match exacto, intentar quitando el último dígito del NIT del dashboard
+      if (!cupoRelacionado && nitBase.length > 5) {
+          cupoRelacionado = cupoMap.get(nitBase.substring(0, nitBase.length - 1));
+      }
 
       const rawCupo = cupoRelacionado ? cupoRelacionado["Cupo_Credito_Cl"] : 0;
       const cupoValor = parseNumber(rawCupo) || 0;
