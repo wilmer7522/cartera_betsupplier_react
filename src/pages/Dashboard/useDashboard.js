@@ -468,11 +468,12 @@ export const useDashboard = () => {
 
     const totalEfectivo = baseGrafica.reduce((acc, b) => acc + b.monto, 0);
 
-    // Calcular cantidad vencida excluyendo NC
-    const columnasVencidas = ["Venc_0_30", "Venc_31_60", "Venc_61_90", "Venc_91"];
-    const cantidadVencidasSinNC = datosSinNC.filter(fila => 
-      columnasVencidas.some(col => (fila[`${col}_num`] || 0) > 0)
-    ).length;
+    // Calcular cantidad vencida como suma de las cantidades de barras vencidas (sin Por Vencer)
+    const cantidadVencidasSinNC = 
+      baseGrafica[1].cantidad + // Venc_0_30
+      baseGrafica[2].cantidad + // Venc_31_60
+      baseGrafica[3].cantidad + // Venc_61_90
+      baseGrafica[4].cantidad;  // Venc_91
 
     return [
       ...baseGrafica,
