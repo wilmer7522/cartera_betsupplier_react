@@ -453,8 +453,11 @@ export const useDashboard = () => {
       { key: "Venc_91", label: "Mas de 90 dias", color: "#6c757d" },
     ];
 
+    // EXCLUIR Notas de Crédito (NC) de los gráficos
+    const datosSinNC = datosFiltradosFinal.filter(f => f.T_Dcto?.toUpperCase() !== "NC");
+
     const baseGrafica = categorias.map((cat) => {
-      const filasEnCategoria = datosFiltradosFinal.filter(f => (f[`${cat.key}_num`] || 0) !== 0);
+      const filasEnCategoria = datosSinNC.filter(f => (f[`${cat.key}_num`] || 0) !== 0);
       return {
         categoria: cat.label,
         cantidad: filasEnCategoria.length,
@@ -465,9 +468,15 @@ export const useDashboard = () => {
 
     const totalEfectivo = baseGrafica.reduce((acc, b) => acc + b.monto, 0);
 
+    // Calcular cantidad vencida excluyendo NC
+    const columnasVencidas = ["Venc_0_30", "Venc_31_60", "Venc_61_90", "Venc_91"];
+    const cantidadVencidasSinNC = datosSinNC.filter(fila => 
+      columnasVencidas.some(col => (fila[`${col}_num`] || 0) > 0)
+    ).length;
+
     return [
       ...baseGrafica,
-      { categoria: "TOTAL", cantidad: cantidadVencidas, monto: totalEfectivo, fill: "#8884d8" }
+      { categoria: "TOTAL", cantidad: cantidadVencidasSinNC, monto: totalEfectivo, fill: "#8884d8" }
     ];
   }, [datosFiltradosFinal, cantidadVencidas]);
   const cargarClientesPaginados = useCallback(async (pagina = 1) => {
